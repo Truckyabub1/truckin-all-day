@@ -158,43 +158,41 @@ function renderMerch(filter = 'all') {
 
     merchGrid.appendChild(card);
   });
-
-  // Attach quick view listeners
-  document.querySelectorAll('.quick-view-btn').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const merchId = btn.dataset.merchId;
-      const item = MERCH_ITEMS.find(m => m.id === merchId);
-      if (item) openMerchModal(item);
-    });
-  });
 }
 
-// ── MERCH MODAL LOGIC ────────────────────────────────────────
+// ── MERCH MODAL LOGIC & ACCESSIBILITY ────────────────────────
+let lastFocusedElement = null;
+
 function openMerchModal(item) {
   if (!merchModal) return;
-  modalIcon.textContent = item.iconEmoji;
-  modalBadge.textContent = item.badge;
-  modalTitle.textContent = item.title;
-  modalPrice.textContent = `$${item.price.toFixed(2)} USD`;
-  modalDesc.textContent = `${item.description} (${item.tag})`;
+  lastFocusedElement = document.activeElement;
 
-  modalSizeOptions.innerHTML = '';
-  item.sizes.forEach((size, idx) => {
-    const pill = document.createElement('button');
-    pill.className = `size-pill ${idx === 0 ? 'active' : ''}`;
-    pill.type = 'button';
-    pill.textContent = size;
-    pill.addEventListener('click', () => {
-      document.querySelectorAll('.size-pill').forEach(p => p.classList.remove('active'));
-      pill.classList.add('active');
+  if (modalIcon) modalIcon.textContent = item.iconEmoji;
+  if (modalBadge) modalBadge.textContent = item.badge;
+  if (modalTitle) modalTitle.textContent = item.title;
+  if (modalPrice) modalPrice.textContent = `$${item.price.toFixed(2)} USD`;
+  if (modalDesc) modalDesc.textContent = `${item.description} (${item.tag})`;
+
+  if (modalSizeOptions) {
+    modalSizeOptions.innerHTML = '';
+    item.sizes.forEach((size, idx) => {
+      const pill = document.createElement('button');
+      pill.className = `size-pill ${idx === 0 ? 'active' : ''}`;
+      pill.type = 'button';
+      pill.textContent = size;
+      pill.addEventListener('click', () => {
+        document.querySelectorAll('.size-pill').forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+      });
+      modalSizeOptions.appendChild(pill);
     });
-    modalSizeOptions.appendChild(pill);
-  });
+  }
 
-  modalOrderBtn.href = STORE_URL;
+  if (modalOrderBtn) modalOrderBtn.href = STORE_URL;
   merchModal.classList.add('is-open');
   merchModal.setAttribute('aria-hidden', 'false');
   document.body.style.overflow = 'hidden';
+  modalCloseBtn?.focus();
 }
 
 function closeMerchModal() {
@@ -202,6 +200,9 @@ function closeMerchModal() {
   merchModal.classList.remove('is-open');
   merchModal.setAttribute('aria-hidden', 'true');
   document.body.style.overflow = '';
+  if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
+    lastFocusedElement.focus();
+  }
 }
 
 // ── SCROLLSPY NAVIGATION ─────────────────────────────────────
@@ -346,6 +347,18 @@ function init() {
   initMobileMenu();
   initNewsletter();
 
+  // Merch Quick View Delegation
+  if (merchGrid) {
+    merchGrid.addEventListener('click', (e) => {
+      const btn = e.target.closest('.quick-view-btn');
+      if (btn) {
+        const merchId = btn.dataset.merchId;
+        const item = MERCH_ITEMS.find((m) => m.id === merchId);
+        if (item) openMerchModal(item);
+      }
+    });
+  }
+
   // Modal close handlers
   if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeMerchModal);
   if (modalDismissBtn) modalDismissBtn.addEventListener('click', closeMerchModal);
@@ -359,6 +372,14 @@ function init() {
       closeMerchModal();
     }
   });
+
+  // Check initial anchor hash navigation for legacy links
+  if (window.location.hash === '#artists') {
+    const musicSec = document.getElementById('music') || document.getElementById('artists');
+    if (musicSec) {
+      setTimeout(() => musicSec.scrollIntoView({ behavior: 'smooth' }), 120);
+    }
+  }
 
   // Initialize Arcade Subsystem
   new ArcadeManager();

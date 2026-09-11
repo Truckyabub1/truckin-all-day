@@ -593,6 +593,28 @@ button {
   border: 1px solid var(--border-subtle);
 }
 
+.spotify-embed-container:empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(90deg, rgba(24, 27, 38, 0.85) 25%, rgba(35, 41, 58, 0.95) 50%, rgba(24, 27, 38, 0.85) 75%);
+  background-size: 200% 100%;
+  animation: spotifySkeletonShimmer 2s infinite ease-in-out;
+}
+
+.spotify-embed-container:empty::before {
+  content: '🎵 Loading Spotify preview...';
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+
+@keyframes spotifySkeletonShimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
 .spotify-embed-container iframe {
   width: 100%;
   height: 100%;
