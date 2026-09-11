@@ -29,134 +29,29 @@ const modalDesc = document.getElementById('modalDesc');
 const modalSizeOptions = document.getElementById('modalSizeOptions');
 const modalOrderBtn = document.getElementById('modalOrderBtn');
 
-// ── INTERSECTION OBSERVER FOR SPOTIFY IFRAMES ────────────────
-let spotifyObserver = null;
-if ('IntersectionObserver' in window) {
-  spotifyObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        const container = entry.target;
-        const src = container.dataset.src;
-        if (src && !container.querySelector('iframe')) {
-          const iframe = document.createElement('iframe');
-          iframe.src = src;
-          iframe.title = container.dataset.title || 'Spotify Player';
-          iframe.allow = 'autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture';
-          iframe.loading = 'lazy';
-          iframe.setAttribute('tabindex', '0');
-          container.appendChild(iframe);
-        }
-        observer.unobserve(container);
-      }
-    });
-  }, { rootMargin: '200px 0px' });
-}
-
-// ── RENDER ARTISTS ───────────────────────────────────────────
-function renderArtists(filter = 'all') {
+// ── FILTER ARTISTS ───────────────────────────────────────────
+function filterArtists(filter = 'all') {
   if (!artistGrid) return;
-  artistGrid.innerHTML = '';
-
-  const filtered = filter === 'all' 
-    ? ARTISTS 
-    : ARTISTS.filter(a => a.genreCategory === filter);
-
-  filtered.forEach((artist) => {
-    const card = document.createElement('article');
-    card.className = 'artist-card';
-    card.dataset.id = artist.id;
-
-    card.innerHTML = `
-      <div class="artist-card-header">
-        <div class="artist-meta-row">
-          <span class="badge badge-cyan">${artist.genre}</span>
-          <span class="badge badge-amber">${artist.badge}</span>
-        </div>
-        <h3 class="artist-name">${artist.name}</h3>
-        <p class="artist-tagline">${artist.tagline}</p>
-      </div>
-
-      <div>
-        <div class="spotify-embed-container" data-src="${artist.spotifyEmbedUrl}" data-title="${artist.name} on Spotify">
-          <!-- Lazy loaded iframe -->
-        </div>
-
-        <div class="streaming-platform-grid" aria-label="${artist.name} streaming links">
-          <a href="${artist.links.spotify}" target="_blank" rel="noopener" class="platform-btn spotify" aria-label="Listen on Spotify">
-            🟢 Spotify
-          </a>
-          <a href="${artist.links.apple}" target="_blank" rel="noopener" class="platform-btn apple" aria-label="Listen on Apple Music">
-            🍎 Apple Music
-          </a>
-          <a href="${artist.links.youtube}" target="_blank" rel="noopener" class="platform-btn youtube" aria-label="Listen on YouTube Music">
-            ▶️ YouTube
-          </a>
-          <a href="${artist.links.amazon}" target="_blank" rel="noopener" class="platform-btn amazon" aria-label="Listen on Amazon Music">
-            📦 Amazon
-          </a>
-          <a href="${artist.links.deezer}" target="_blank" rel="noopener" class="platform-btn deezer" aria-label="Listen on Deezer" style="grid-column: span 2;">
-            🟣 Deezer
-          </a>
-        </div>
-      </div>
-    `;
-
-    artistGrid.appendChild(card);
-
-    const embedContainer = card.querySelector('.spotify-embed-container');
-    if (spotifyObserver && embedContainer) {
-      spotifyObserver.observe(embedContainer);
-    } else if (embedContainer) {
-      // Fallback eager loading
-      const iframe = document.createElement('iframe');
-      iframe.src = artist.spotifyEmbedUrl;
-      iframe.title = artist.name;
-      iframe.allow = 'autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture';
-      embedContainer.appendChild(iframe);
+  const cards = artistGrid.querySelectorAll('.artist-card');
+  cards.forEach((card) => {
+    if (filter === 'all' || card.dataset.genreCategory === filter) {
+      card.style.display = '';
+    } else {
+      card.style.display = 'none';
     }
   });
 }
 
-// ── RENDER MERCH ─────────────────────────────────────────────
-function renderMerch(filter = 'all') {
+// ── FILTER MERCH ─────────────────────────────────────────────
+function filterMerch(filter = 'all') {
   if (!merchGrid) return;
-  merchGrid.innerHTML = '';
-
-  const filtered = filter === 'all'
-    ? MERCH_ITEMS
-    : MERCH_ITEMS.filter(m => m.category === filter);
-
-  filtered.forEach((item) => {
-    const card = document.createElement('article');
-    card.className = 'merch-card';
-    card.dataset.id = item.id;
-
-    card.innerHTML = `
-      <div class="merch-visual">
-        <span class="merch-icon-preview" aria-hidden="true">${item.iconEmoji}</span>
-        <span class="badge badge-amber merch-badge-pos">${item.badge}</span>
-        <span class="merch-price-tag">$${item.price.toFixed(2)}</span>
-      </div>
-
-      <div class="merch-info">
-        <div>
-          <span class="merch-artist-tag">${item.artist}</span>
-          <h3 class="merch-title">${item.title}</h3>
-          <p class="merch-desc">${item.description}</p>
-        </div>
-
-        <div class="merch-actions">
-          <button class="btn btn-secondary btn-sm quick-view-btn" data-merch-id="${item.id}" type="button" style="flex: 1;">
-            Quick View 👁️
-          </button>
-          <a href="${STORE_URL}" target="_blank" rel="noopener" class="btn btn-amber btn-sm" style="flex: 1;">
-            Buy Now 🛍️
-          </a>
-        </div>
-      </div>
-    `;
-
-    merchGrid.appendChild(card);
+  const cards = merchGrid.querySelectorAll('.merch-card');
+  cards.forEach((card) => {
+    if (filter === 'all' || card.dataset.category === filter) {
+      card.style.display = '';
+    } else {
+      card.style.display = 'none';
+    }
   });
 }
 
@@ -317,7 +212,7 @@ function initFilters() {
         });
         btn.classList.add('active');
         btn.setAttribute('aria-selected', 'true');
-        renderArtists(btn.dataset.filter);
+        filterArtists(btn.dataset.filter);
       });
     });
   }
@@ -332,7 +227,7 @@ function initFilters() {
         });
         btn.classList.add('active');
         btn.setAttribute('aria-selected', 'true');
-        renderMerch(btn.dataset.merchFilter);
+        filterMerch(btn.dataset.merchFilter);
       });
     });
   }
@@ -340,8 +235,6 @@ function initFilters() {
 
 // ── APP BOOTSTRAP ────────────────────────────────────────────
 function init() {
-  renderArtists();
-  renderMerch();
   initFilters();
   initScrollSpy();
   initMobileMenu();

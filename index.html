@@ -33,10 +33,14 @@
   <link rel="apple-touch-icon" href="/favicon.svg" />
   <link rel="manifest" href="/site.webmanifest" />
 
-  <!-- Google Fonts Preconnect & Stylesheet -->
+  <!-- Google Fonts Preconnect & Optimized Stylesheet -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&family=Space+Mono:wght@700&family=Syne:wght@700;800;900&display=swap" rel="stylesheet" />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&family=Space+Mono:wght@700&family=Syne:wght@700;800;900&display=swap" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&family=Space+Mono:wght@700&family=Syne:wght@700;800;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&family=Space+Mono:wght@700&family=Syne:wght@700;800;900&display=swap" />
+  </noscript>
 
   <!-- CSS Stylesheets -->
   <link rel="stylesheet" href="/src/styles/main.css" />
@@ -188,9 +192,127 @@
           <button class="filter-btn" data-filter="mining" type="button" role="tab" aria-selected="false">Industrial Mining & Americana</button>
         </div>
 
-        <!-- Artist Cards Grid (Rendered via main.js) -->
+        <!-- Artist Cards Grid (Pre-rendered for instant FCP & SEO) -->
         <div class="artist-grid" id="artistGrid" aria-live="polite">
-          <!-- Dynamically populated -->
+          <!-- Artist 1: CLOCKWORK HARE -->
+          <article class="artist-card" data-id="clockwork-hare" data-genre-category="steampunk">
+            <div class="artist-card-header">
+              <div class="artist-meta-row">
+                <span class="badge badge-cyan">Steampunk / Electro-Rock</span>
+                <span class="badge badge-amber">ARCADE HERO</span>
+              </div>
+              <h3 class="artist-name">CLOCKWORK HARE</h3>
+              <p class="artist-tagline">Mechanical rhythms meet driving melodic hooks and brass-wound basslines.</p>
+            </div>
+            <div>
+              <div class="spotify-embed-container">
+                <iframe src="https://open.spotify.com/embed/artist/5LAQn3bd2ON2IAk8p6gC3h" title="CLOCKWORK HARE on Spotify" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" tabindex="0"></iframe>
+              </div>
+              <div class="streaming-platform-grid" aria-label="CLOCKWORK HARE streaming links">
+                <a href="https://open.spotify.com/artist/5LAQn3bd2ON2IAk8p6gC3h" target="_blank" rel="noopener" class="platform-btn spotify" aria-label="Listen on Spotify">🟢 Spotify</a>
+                <a href="https://music.apple.com/us/artist/clockwork-hare/1896298714" target="_blank" rel="noopener" class="platform-btn apple" aria-label="Listen on Apple Music">🍎 Apple Music</a>
+                <a href="https://music.youtube.com/channel/UCxYN2naqrhyNNb_KGJrj-Rg?si=u0-pGWbhvLW_Axxw" target="_blank" rel="noopener" class="platform-btn youtube" aria-label="Listen on YouTube Music">▶️ YouTube</a>
+                <a href="https://music.amazon.co.uk/artists/B0GZLJTBRK/clockwork-hare" target="_blank" rel="noopener" class="platform-btn amazon" aria-label="Listen on Amazon Music">📦 Amazon</a>
+                <a href="https://link.deezer.com/s/344kPSPntZoEWOMeNLriT" target="_blank" rel="noopener" class="platform-btn deezer" aria-label="Listen on Deezer" style="grid-column: span 2;">🟣 Deezer</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Artist 2: Keep on Truckin' 24 7 -->
+          <article class="artist-card" data-id="keep-on-truckin" data-genre-category="rock">
+            <div class="artist-card-header">
+              <div class="artist-meta-row">
+                <span class="badge badge-cyan">Outlaw Country / Southern Rock</span>
+                <span class="badge badge-amber">HIGHWAY HEADLINER</span>
+              </div>
+              <h3 class="artist-name">Keep on Truckin' 24 7</h3>
+              <p class="artist-tagline">Unstoppable eighteen-wheel anthems built for long-haul midnight highway runs.</p>
+            </div>
+            <div>
+              <div class="spotify-embed-container">
+                <iframe src="https://open.spotify.com/embed/artist/1wTZsklVdp8kNNlvKJb5qy" title="Keep on Truckin' 24 7 on Spotify" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" tabindex="0"></iframe>
+              </div>
+              <div class="streaming-platform-grid" aria-label="Keep on Truckin' 24 7 streaming links">
+                <a href="https://open.spotify.com/artist/1wTZsklVdp8kNNlvKJb5qy" target="_blank" rel="noopener" class="platform-btn spotify" aria-label="Listen on Spotify">🟢 Spotify</a>
+                <a href="https://music.apple.com/us/artist/keep-on-truckin-24-7/1888811097" target="_blank" rel="noopener" class="platform-btn apple" aria-label="Listen on Apple Music">🍎 Apple Music</a>
+                <a href="https://music.youtube.com/channel/UCz8ZySrm95xJtpxphH-dimA" target="_blank" rel="noopener" class="platform-btn youtube" aria-label="Listen on YouTube Music">▶️ YouTube</a>
+                <a href="https://music.amazon.co.uk/artists/B0GVBN6S9K/keep-on-truckin'-24-7" target="_blank" rel="noopener" class="platform-btn amazon" aria-label="Listen on Amazon Music">📦 Amazon</a>
+                <a href="https://www.deezer.com/en/artist/382280851" target="_blank" rel="noopener" class="platform-btn deezer" aria-label="Listen on Deezer" style="grid-column: span 2;">🟣 Deezer</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Artist 3: Iron Stallion Mining Music -->
+          <article class="artist-card" data-id="iron-stallion" data-genre-category="mining">
+            <div class="artist-card-header">
+              <div class="artist-meta-row">
+                <span class="badge badge-cyan">Heavy Industrial / Roots Metal</span>
+                <span class="badge badge-amber">HEAVY ROOTS</span>
+              </div>
+              <h3 class="artist-name">Iron Stallion Mining Music</h3>
+              <p class="artist-tagline">Deep-shaft subterranean grooves hammered out in raw iron and acoustic steel.</p>
+            </div>
+            <div>
+              <div class="spotify-embed-container">
+                <iframe src="https://open.spotify.com/embed/artist/3m5JAbsp5lsl9NNRH993Jn" title="Iron Stallion Mining Music on Spotify" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" tabindex="0"></iframe>
+              </div>
+              <div class="streaming-platform-grid" aria-label="Iron Stallion Mining Music streaming links">
+                <a href="https://open.spotify.com/artist/3m5JAbsp5lsl9NNRH993Jn" target="_blank" rel="noopener" class="platform-btn spotify" aria-label="Listen on Spotify">🟢 Spotify</a>
+                <a href="https://music.apple.com/us/artist/iron-stallion-mining-music/1889242335" target="_blank" rel="noopener" class="platform-btn apple" aria-label="Listen on Apple Music">🍎 Apple Music</a>
+                <a href="https://music.youtube.com/watch?v=hAErKaXCiyQ" target="_blank" rel="noopener" class="platform-btn youtube" aria-label="Listen on YouTube Music">▶️ YouTube</a>
+                <a href="https://music.amazon.co.uk/artists/B0GVJ2W8Q6/iron-stallion-mining-music" target="_blank" rel="noopener" class="platform-btn amazon" aria-label="Listen on Amazon Music">📦 Amazon</a>
+                <a href="https://link.deezer.com/s/344kLs4qSik472bU5NaqE" target="_blank" rel="noopener" class="platform-btn deezer" aria-label="Listen on Deezer" style="grid-column: span 2;">🟣 Deezer</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Artist 4: Harlan Echo -->
+          <article class="artist-card" data-id="harlan-echo" data-genre-category="mining">
+            <div class="artist-card-header">
+              <div class="artist-meta-row">
+                <span class="badge badge-cyan">Appalachian Noir / Dark Americana</span>
+                <span class="badge badge-amber">DARK AMERICANA</span>
+              </div>
+              <h3 class="artist-name">Harlan Echo</h3>
+              <p class="artist-tagline">Haunting acoustic ballads echoing from misty mountain hollows and forgotten mines.</p>
+            </div>
+            <div>
+              <div class="spotify-embed-container">
+                <iframe src="https://open.spotify.com/embed/artist/1Eu8tyGtdQSAyIhzfwBIy0" title="Harlan Echo on Spotify" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" tabindex="0"></iframe>
+              </div>
+              <div class="streaming-platform-grid" aria-label="Harlan Echo streaming links">
+                <a href="https://open.spotify.com/artist/1Eu8tyGtdQSAyIhzfwBIy0" target="_blank" rel="noopener" class="platform-btn spotify" aria-label="Listen on Spotify">🟢 Spotify</a>
+                <a href="https://music.apple.com/us/artist/harlan-echo/1896240540" target="_blank" rel="noopener" class="platform-btn apple" aria-label="Listen on Apple Music">🍎 Apple Music</a>
+                <a href="https://music.youtube.com/channel/UCPo0R48-y4WA818ejXNIIXQ" target="_blank" rel="noopener" class="platform-btn youtube" aria-label="Listen on YouTube Music">▶️ YouTube</a>
+                <a href="https://music.amazon.co.uk/artists/B0GZHWH24K/harlan-echo" target="_blank" rel="noopener" class="platform-btn amazon" aria-label="Listen on Amazon Music">📦 Amazon</a>
+                <a href="https://link.deezer.com/s/344lybtLgfHGQAILHf1KF" target="_blank" rel="noopener" class="platform-btn deezer" aria-label="Listen on Deezer" style="grid-column: span 2;">🟣 Deezer</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Artist 5: Subzero Pulsewavez -->
+          <article class="artist-card" data-id="subzero-pulsewavez" data-genre-category="steampunk">
+            <div class="artist-card-header">
+              <div class="artist-meta-row">
+                <span class="badge badge-cyan">Cyber Synthwave / Neon Retrowave</span>
+                <span class="badge badge-amber">NEON RETROWAVE</span>
+              </div>
+              <h3 class="artist-name">Subzero Pulsewavez</h3>
+              <p class="artist-tagline">Sub-zero bass arpeggios slicing through nocturnal highways at 120 MPH.</p>
+            </div>
+            <div>
+              <div class="spotify-embed-container">
+                <iframe src="https://open.spotify.com/embed/artist/6WP6XVegHuqBX5EODcCJgs" title="Subzero Pulsewavez on Spotify" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" tabindex="0"></iframe>
+              </div>
+              <div class="streaming-platform-grid" aria-label="Subzero Pulsewavez streaming links">
+                <a href="https://open.spotify.com/artist/6WP6XVegHuqBX5EODcCJgs" target="_blank" rel="noopener" class="platform-btn spotify" aria-label="Listen on Spotify">🟢 Spotify</a>
+                <a href="https://music.apple.com/us/artist/subzero-pulsewavez/1896303097" target="_blank" rel="noopener" class="platform-btn apple" aria-label="Listen on Apple Music">🍎 Apple Music</a>
+                <a href="https://music.youtube.com/channel/UCfBxPWifNn-3MpyeLwnFu6A" target="_blank" rel="noopener" class="platform-btn youtube" aria-label="Listen on YouTube Music">▶️ YouTube</a>
+                <a href="https://music.amazon.co.uk/artists/B0GZLL82Q4/subzero-pulsewavez" target="_blank" rel="noopener" class="platform-btn amazon" aria-label="Listen on Amazon Music">📦 Amazon</a>
+                <a href="https://link.deezer.com/s/344lBHH7LElnKW79D7ugK" target="_blank" rel="noopener" class="platform-btn deezer" aria-label="Listen on Deezer" style="grid-column: span 2;">🟣 Deezer</a>
+              </div>
+            </div>
+          </article>
         </div>
       </div>
     </section>
@@ -321,9 +443,121 @@
           <button class="filter-btn" data-merch-filter="accessories" type="button" role="tab" aria-selected="false">Accessories & Pins</button>
         </div>
 
-        <!-- Merch Grid (Rendered via main.js) -->
+        <!-- Merch Grid (Pre-rendered for instant FCP & SEO) -->
         <div class="merch-grid" id="merchGrid" aria-live="polite">
-          <!-- Dynamically populated -->
+          <article class="merch-card" data-id="vinyl-keep-on-truckin" data-category="vinyl">
+            <div class="merch-visual">
+              <span class="merch-icon-preview" aria-hidden="true">💿</span>
+              <span class="badge badge-amber merch-badge-pos">COLLECTOR EDITION</span>
+              <span class="merch-price-tag">$34.99</span>
+            </div>
+            <div class="merch-info">
+              <div>
+                <span class="merch-artist-tag">Keep on Truckin' 24 7</span>
+                <h3 class="merch-title">Keep on Truckin' 24 7 — Limited 12" Heavyweight Vinyl</h3>
+                <p class="merch-desc">Pressed on 180-gram smoke-marbled audiophile vinyl. Includes gatefold jacket, metallic foil numbering, custom printed inner sleeve, and instant lossless digital download.</p>
+              </div>
+              <div class="merch-actions">
+                <button class="btn btn-secondary btn-sm quick-view-btn" data-merch-id="vinyl-keep-on-truckin" type="button" style="flex: 1;">Quick View 👁️</button>
+                <a href="https://truckinallday.bandcamp.com/merch" target="_blank" rel="noopener" class="btn btn-amber btn-sm" style="flex: 1;">Buy Now 🛍️</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="merch-card" data-id="tee-clockwork-hare" data-category="apparel">
+            <div class="merch-visual">
+              <span class="merch-icon-preview" aria-hidden="true">👕</span>
+              <span class="badge badge-amber merch-badge-pos">BESTSELLER</span>
+              <span class="merch-price-tag">$29.99</span>
+            </div>
+            <div class="merch-info">
+              <div>
+                <span class="merch-artist-tag">CLOCKWORK HARE</span>
+                <h3 class="merch-title">Clockwork Hare 'Gear Bunny' Vintage Heavyweight Tee</h3>
+                <p class="merch-desc">Vintage washed charcoal black tee featuring distressed metallic copper & neon cyan 'Gear Runner' rabbit illustration on back with official label chest insignia.</p>
+              </div>
+              <div class="merch-actions">
+                <button class="btn btn-secondary btn-sm quick-view-btn" data-merch-id="tee-clockwork-hare" type="button" style="flex: 1;">Quick View 👁️</button>
+                <a href="https://truckinallday.bandcamp.com/merch" target="_blank" rel="noopener" class="btn btn-amber btn-sm" style="flex: 1;">Buy Now 🛍️</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="merch-card" data-id="cap-iron-stallion" data-category="apparel">
+            <div class="merch-visual">
+              <span class="merch-icon-preview" aria-hidden="true">🧢</span>
+              <span class="badge badge-amber merch-badge-pos">NEW DROP</span>
+              <span class="merch-price-tag">$24.99</span>
+            </div>
+            <div class="merch-info">
+              <div>
+                <span class="merch-artist-tag">Iron Stallion Mining Music</span>
+                <h3 class="merch-title">Iron Stallion Deep-Shaft Heavyweight Snapback</h3>
+                <p class="merch-desc">Tough charcoal twill snapback cap with raised 3D matte gunmetal embroidery, brass grommets, and moisture-wicking sweatband.</p>
+              </div>
+              <div class="merch-actions">
+                <button class="btn btn-secondary btn-sm quick-view-btn" data-merch-id="cap-iron-stallion" type="button" style="flex: 1;">Quick View 👁️</button>
+                <a href="https://truckinallday.bandcamp.com/merch" target="_blank" rel="noopener" class="btn btn-amber btn-sm" style="flex: 1;">Buy Now 🛍️</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="merch-card" data-id="pins-arcade-collector" data-category="accessories">
+            <div class="merch-visual">
+              <span class="merch-icon-preview" aria-hidden="true">🎖️</span>
+              <span class="badge badge-amber merch-badge-pos">LIMITED SET</span>
+              <span class="merch-price-tag">$18.99</span>
+            </div>
+            <div class="merch-info">
+              <div>
+                <span class="merch-artist-tag">All Roster</span>
+                <h3 class="merch-title">Official Truckin all Day Arcade Enamel Pin Set</h3>
+                <p class="merch-desc">4-piece collector pin set featuring the Brass Helicopter Bunny, Heavy Diesel Hauler, Iron Pickaxe, and Neon Synthwave Cassette with deluxe clutch backings.</p>
+              </div>
+              <div class="merch-actions">
+                <button class="btn btn-secondary btn-sm quick-view-btn" data-merch-id="pins-arcade-collector" type="button" style="flex: 1;">Quick View 👁️</button>
+                <a href="https://truckinallday.bandcamp.com/merch" target="_blank" rel="noopener" class="btn btn-amber btn-sm" style="flex: 1;">Buy Now 🛍️</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="merch-card" data-id="hoodie-subzero-pulse" data-category="apparel">
+            <div class="merch-visual">
+              <span class="merch-icon-preview" aria-hidden="true">🧥</span>
+              <span class="badge badge-amber merch-badge-pos">PREMIUM FLEECE</span>
+              <span class="merch-price-tag">$54.99</span>
+            </div>
+            <div class="merch-info">
+              <div>
+                <span class="merch-artist-tag">Subzero Pulsewavez</span>
+                <h3 class="merch-title">Subzero Pulsewavez Nocturnal Highway Zip Hoodie</h3>
+                <p class="merch-desc">Plush organic cotton fleece with reflective iridescent neon sleeve prints, double-lined hood, thumbhole cuffs, and heavy-duty dual zippers.</p>
+              </div>
+              <div class="merch-actions">
+                <button class="btn btn-secondary btn-sm quick-view-btn" data-merch-id="hoodie-subzero-pulse" type="button" style="flex: 1;">Quick View 👁️</button>
+                <a href="https://truckinallday.bandcamp.com/merch" target="_blank" rel="noopener" class="btn btn-amber btn-sm" style="flex: 1;">Buy Now 🛍️</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="merch-card" data-id="stickers-harlan-echo" data-category="accessories">
+            <div class="merch-visual">
+              <span class="merch-icon-preview" aria-hidden="true">✨</span>
+              <span class="badge badge-amber merch-badge-pos">POPULAR</span>
+              <span class="merch-price-tag">$11.99</span>
+            </div>
+            <div class="merch-info">
+              <div>
+                <span class="merch-artist-tag">All Roster</span>
+                <h3 class="merch-title">Truckin all Day Holographic Die-Cut Sticker Pack</h3>
+                <p class="merch-desc">Pack of 8 ultra-durable weatherproof holographic decals featuring all 5 artist emblems, arcade logos, and vintage highway route signs.</p>
+              </div>
+              <div class="merch-actions">
+                <button class="btn btn-secondary btn-sm quick-view-btn" data-merch-id="stickers-harlan-echo" type="button" style="flex: 1;">Quick View 👁️</button>
+                <a href="https://truckinallday.bandcamp.com/merch" target="_blank" rel="noopener" class="btn btn-amber btn-sm" style="flex: 1;">Buy Now 🛍️</a>
+              </div>
+            </div>
+          </article>
         </div>
       </div>
     </section>
