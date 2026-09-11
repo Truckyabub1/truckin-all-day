@@ -1,6 +1,9 @@
 import { isSoundEnabled, toggleSound, getAudioContext } from './audio.js';
 import { ClockworkHareEngine, LOGICAL_WIDTH, LOGICAL_HEIGHT } from './clockwork-hare.js';
 import { HeavyDirtHaulerEngine } from './heavy-dirt-hauler.js';
+import { OreDrillRushEngine } from './ore-drill-rush.js';
+import { TimberHollowTrailEngine } from './timber-hollow-trail.js';
+import { NeonHighwayEngine } from './neon-highway.js';
 
 export class ArcadeManager {
   constructor() {
@@ -24,6 +27,9 @@ export class ArcadeManager {
 
     this.clockworkCardHighScore = document.getElementById('clockworkCardHighScore');
     this.haulerCardHighScore = document.getElementById('haulerCardHighScore');
+    this.drillCardHighScore = document.getElementById('drillCardHighScore');
+    this.timberCardHighScore = document.getElementById('timberCardHighScore');
+    this.neonCardHighScore = document.getElementById('neonCardHighScore');
     this.virtualControls = document.getElementById('virtualControls');
 
     this.activeEngine = null;
@@ -32,7 +38,7 @@ export class ArcadeManager {
     this.lastTime = 0;
     this._toastTimer = null;
 
-    // Initialize engines
+    // Instantiate all 5 signature artist engines
     this.clockworkEngine = new ClockworkHareEngine(
       this.canvas,
       this.ctx,
@@ -49,6 +55,38 @@ export class ArcadeManager {
       (icon, msg) => this.showAchievement(icon, msg)
     );
 
+    this.drillEngine = new OreDrillRushEngine(
+      this.canvas,
+      this.ctx,
+      (score, hi) => this.handleScoreUpdate(score, hi),
+      (score, hi) => this.handleGameOver(score, hi),
+      (icon, msg) => this.showAchievement(icon, msg)
+    );
+
+    this.timberEngine = new TimberHollowTrailEngine(
+      this.canvas,
+      this.ctx,
+      (score, hi) => this.handleScoreUpdate(score, hi),
+      (score, hi) => this.handleGameOver(score, hi),
+      (icon, msg) => this.showAchievement(icon, msg)
+    );
+
+    this.neonEngine = new NeonHighwayEngine(
+      this.canvas,
+      this.ctx,
+      (score, hi) => this.handleScoreUpdate(score, hi),
+      (score, hi) => this.handleGameOver(score, hi),
+      (icon, msg) => this.showAchievement(icon, msg)
+    );
+
+    this.engines = {
+      clockwork: this.clockworkEngine,
+      hauler: this.haulerEngine,
+      drill: this.drillEngine,
+      timber: this.timberEngine,
+      neon: this.neonEngine
+    };
+
     this.setupHiDPI();
     this.bindEvents();
     this.refreshScores();
@@ -63,14 +101,12 @@ export class ArcadeManager {
   }
 
   refreshScores() {
-    this.clockworkEngine.init();
-    this.haulerEngine.init();
-    if (this.clockworkCardHighScore) {
-      this.clockworkCardHighScore.textContent = this.clockworkEngine.highScore;
-    }
-    if (this.haulerCardHighScore) {
-      this.haulerCardHighScore.textContent = this.haulerEngine.highScore;
-    }
+    Object.values(this.engines).forEach(e => e.init());
+    if (this.clockworkCardHighScore) this.clockworkCardHighScore.textContent = this.clockworkEngine.highScore;
+    if (this.haulerCardHighScore) this.haulerCardHighScore.textContent = this.haulerEngine.highScore;
+    if (this.drillCardHighScore) this.drillCardHighScore.textContent = this.drillEngine.highScore;
+    if (this.timberCardHighScore) this.timberCardHighScore.textContent = this.timberEngine.highScore;
+    if (this.neonCardHighScore) this.neonCardHighScore.textContent = this.neonEngine.highScore;
   }
 
   handleScoreUpdate(score, hi) {
@@ -80,11 +116,18 @@ export class ArcadeManager {
   }
 
   handleGameOver(score, hi) {
+    const titles = {
+      clockwork: 'GEAR COLLISION!',
+      hauler: 'HAUL COMPLETE!',
+      drill: 'DRILL SHAFT COLLAPSE!',
+      timber: 'TIMBER IMPACT!',
+      neon: 'SYSTEM GRID OVERLOAD!'
+    };
     if (this.overlayTitle) {
-      this.overlayTitle.textContent = this.activeKey === 'clockwork' ? 'GEAR COLLISION!' : 'HAUL COMPLETE!';
+      this.overlayTitle.textContent = titles[this.activeKey] || 'GAME OVER';
     }
     if (this.overlayMessage) {
-      this.overlayMessage.textContent = `Score: ${score} | Best: ${hi}. Tap or press Space to play again.`;
+      this.overlayMessage.textContent = `Score: ${score} | Record: ${hi}. Tap or press Space to retry.`;
     }
     this.showOverlay();
   }
@@ -126,41 +169,64 @@ export class ArcadeManager {
 
     document.body.classList.add('arcade-active');
     this.activeKey = gameKey;
+    Object.values(this.engines).forEach(e => e.reset());
 
-    this.clockworkEngine.reset();
-    this.haulerEngine.reset();
+    const configs = {
+      clockwork: {
+        engine: this.clockworkEngine,
+        title: 'CLOCKWORK HARE • Gear Runner',
+        desc: 'Tap screen or press Space to jump. Hold mid-air to deploy spinning helicopter ears and glide!',
+        hint: '🚁 Tap & hold screen or press Space to hover.',
+        virtualControls: false
+      },
+      hauler: {
+        engine: this.haulerEngine,
+        title: "Keep on Truckin' • Heavy Dirt Hauler",
+        desc: 'Classic heavy-equipment convoy snake! Swipe, use virtual D-pad, or arrow keys to steer the 18-wheeler.',
+        hint: '🚚 Swipe on screen, use D-pad, or arrow keys to steer.',
+        virtualControls: true
+      },
+      drill: {
+        engine: this.drillEngine,
+        title: 'Iron Stallion • Ore Drill Rush',
+        desc: 'Shift rail tracks (A/D, Left/Right, Swipe) to drill gold and iron ore veins while dodging sharp stalactites.',
+        hint: '⛏️ Tap left/right or swipe to change rail tracks.',
+        virtualControls: true
+      },
+      timber: {
+        engine: this.timberEngine,
+        title: 'Harlan Echo • Timber Hollow Trail',
+        desc: 'Steer the vintage 1970s mountain pickup truck through night mist. Dodge fallen timber and collect vinyl records!',
+        hint: '🌲 Steer left/right (A/D, Arrow keys, or touch buttons).',
+        virtualControls: true
+      },
+      neon: {
+        engine: this.neonEngine,
+        title: 'Subzero Pulsewavez • Neon Highway 120',
+        desc: '120 MPH synthwave speeder! Shift lanes to hit neon pulse boost arches and avoid cruising cyber-traffic.',
+        hint: '⚡ Shift lanes (Left/Right or Swipe) to hit boost gates.',
+        virtualControls: true
+      }
+    };
 
-    if (gameKey === 'clockwork') {
-      this.activeEngine = this.clockworkEngine;
-      if (this.cabinetTitle) this.cabinetTitle.textContent = 'CLOCKWORK HARE • Gear Runner';
-      if (this.cabinetDesc) {
-        this.cabinetDesc.textContent =
-          'Tap or press Space to jump. Hold mid-air to deploy spinning helicopter ears and float over gears!';
-      }
-      if (this.touchHint) this.touchHint.textContent = '🚁 Tap & hold screen or press Space to hover.';
-      if (this.virtualControls) this.virtualControls.style.display = 'none';
-    } else {
-      this.activeEngine = this.haulerEngine;
-      if (this.cabinetTitle) this.cabinetTitle.textContent = "Keep on Truckin' • Heavy Dirt Hauler";
-      if (this.cabinetDesc) {
-        this.cabinetDesc.textContent =
-          'Classic heavy-machinery snake: swipe, tap virtual D-pad, or use arrow keys to navigate the haul convoy.';
-      }
-      if (this.touchHint) this.touchHint.textContent = '🚚 Swipe on screen, use D-pad, or arrow keys to steer.';
-      if (this.virtualControls) this.virtualControls.style.display = 'flex';
-    }
+    const config = configs[gameKey] || configs.clockwork;
+    this.activeEngine = config.engine;
+    if (this.cabinetTitle) this.cabinetTitle.textContent = config.title;
+    if (this.cabinetDesc) this.cabinetDesc.textContent = config.desc;
+    if (this.touchHint) this.touchHint.textContent = config.hint;
+    if (this.virtualControls) this.virtualControls.style.display = config.virtualControls ? 'flex' : 'none';
 
     if (this.lobbyView) this.lobbyView.style.display = 'none';
     if (this.cabinetView) this.cabinetView.style.display = 'grid';
 
     this.hideOverlay();
+    this.setupHiDPI();
     this.activeEngine.init();
     this.handleScoreUpdate(this.activeEngine.score, this.activeEngine.highScore);
     this.activeEngine.start();
     this.lastTime = 0;
     this.startLoop();
 
-    // Scroll smoothly to cabinet view
     this.cabinetView.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
@@ -178,7 +244,6 @@ export class ArcadeManager {
     if (this.virtualControls) this.virtualControls.style.display = 'none';
     this.refreshScores();
 
-    // Scroll back to arcade lobby
     const arcadeSection = document.getElementById('arcade');
     if (arcadeSection) arcadeSection.scrollIntoView({ behavior: 'smooth' });
   }
@@ -190,7 +255,6 @@ export class ArcadeManager {
       this.lastTime = timestamp;
 
       if (this.activeEngine && this.activeEngine.isRunning) {
-        this.pollGamepad();
         this.activeEngine.update(delta);
         this.activeEngine.render();
       }
@@ -199,49 +263,6 @@ export class ArcadeManager {
     };
 
     this.frameReq = requestAnimationFrame(loop);
-  }
-
-  pollGamepad() {
-    const gamepads = navigator.getGamepads ? navigator.getGamepads() : [];
-    const gp = gamepads[0];
-    if (!gp || !this.activeEngine) return;
-
-    if (this.activeEngine === this.clockworkEngine) {
-      if (gp.buttons[0] && gp.buttons[0].pressed) {
-        this.clockworkEngine.handlePressDown();
-      } else {
-        this.clockworkEngine.handlePressUp();
-      }
-      return;
-    }
-
-    if (this.activeEngine === this.haulerEngine && this.haulerEngine.isRunning && !this.haulerEngine.isOver) {
-      const ax = gp.axes[0] || 0;
-      const ay = gp.axes[1] || 0;
-      let dir = null;
-      if (Math.abs(ax) > 0.25 || Math.abs(ay) > 0.25) {
-        if (Math.abs(ax) > Math.abs(ay)) {
-          dir = ax > 0 ? 'right' : 'left';
-        } else {
-          dir = ay > 0 ? 'down' : 'up';
-        }
-      }
-      if (!dir) {
-        if (gp.buttons[12] && gp.buttons[12].pressed) dir = 'up';
-        else if (gp.buttons[13] && gp.buttons[13].pressed) dir = 'down';
-        else if (gp.buttons[14] && gp.buttons[14].pressed) dir = 'left';
-        else if (gp.buttons[15] && gp.buttons[15].pressed) dir = 'right';
-      }
-      if (dir && dir !== this._lastGpDir) {
-        this._lastGpDir = dir;
-        if (dir === 'up') this.haulerEngine.setDirection({ x: 0, y: -1 });
-        else if (dir === 'down') this.haulerEngine.setDirection({ x: 0, y: 1 });
-        else if (dir === 'left') this.haulerEngine.setDirection({ x: -1, y: 0 });
-        else if (dir === 'right') this.haulerEngine.setDirection({ x: 1, y: 0 });
-      } else if (!dir) {
-        this._lastGpDir = null;
-      }
-    }
   }
 
   bindEvents() {
@@ -292,10 +313,10 @@ export class ArcadeManager {
       });
     }
 
-    // Touch & Mouse Gesture Engine
+    // Touch & Mouse Gesture Handling
     let touchStartX = 0;
     let touchStartY = 0;
-    const SWIPE_THRESHOLD = 14;
+    const SWIPE_THRESHOLD = 16;
 
     const handleTouchStart = (e) => {
       if (!this.activeEngine) return;
@@ -307,14 +328,14 @@ export class ArcadeManager {
 
       if (this.activeEngine === this.clockworkEngine) {
         this.clockworkEngine.handlePressDown();
-      } else if (this.activeEngine === this.haulerEngine && (!this.haulerEngine.isRunning || this.haulerEngine.isOver)) {
+      } else if (!this.activeEngine.isRunning || this.activeEngine.isOver) {
         this.hideOverlay();
-        this.haulerEngine.start();
+        this.activeEngine.start();
       }
     };
 
     const handleTouchMove = (e) => {
-      if (!this.activeEngine || this.activeEngine !== this.haulerEngine || !this.haulerEngine.isRunning) return;
+      if (!this.activeEngine || !this.activeEngine.isRunning) return;
       e.preventDefault();
       if (!e.touches.length) return;
 
@@ -325,10 +346,20 @@ export class ArcadeManager {
       const absY = Math.abs(deltaY);
 
       if (Math.max(absX, absY) >= SWIPE_THRESHOLD) {
-        if (absX > absY) {
-          this.haulerEngine.setDirection(deltaX > 0 ? { x: 1, y: 0 } : { x: -1, y: 0 });
-        } else {
-          this.haulerEngine.setDirection(deltaY > 0 ? { x: 0, y: 1 } : { x: 0, y: -1 });
+        if (this.activeEngine === this.haulerEngine) {
+          if (absX > absY) {
+            this.haulerEngine.setDirection(deltaX > 0 ? { x: 1, y: 0 } : { x: -1, y: 0 });
+          } else {
+            this.haulerEngine.setDirection(deltaY > 0 ? { x: 0, y: 1 } : { x: 0, y: -1 });
+          }
+        } else if (this.activeEngine === this.drillEngine) {
+          if (deltaX > 0) this.drillEngine.moveRight();
+          else this.drillEngine.moveLeft();
+        } else if (this.activeEngine === this.timberEngine) {
+          this.timberEngine.setSteer(deltaX > 0 ? 1 : -1);
+        } else if (this.activeEngine === this.neonEngine) {
+          if (deltaX > 0) this.neonEngine.moveRight();
+          else this.neonEngine.moveLeft();
         }
         touchStartX = touch.clientX;
         touchStartY = touch.clientY;
@@ -340,23 +371,8 @@ export class ArcadeManager {
       e.preventDefault();
       if (this.activeEngine === this.clockworkEngine) {
         this.clockworkEngine.handlePressUp();
-        return;
-      }
-
-      if (this.activeEngine === this.haulerEngine && e.changedTouches.length) {
-        const touch = e.changedTouches[0];
-        const deltaX = touch.clientX - touchStartX;
-        const deltaY = touch.clientY - touchStartY;
-        const absX = Math.abs(deltaX);
-        const absY = Math.abs(deltaY);
-
-        if (Math.max(absX, absY) >= SWIPE_THRESHOLD) {
-          if (absX > absY) {
-            this.haulerEngine.setDirection(deltaX > 0 ? { x: 1, y: 0 } : { x: -1, y: 0 });
-          } else {
-            this.haulerEngine.setDirection(deltaY > 0 ? { x: 0, y: 1 } : { x: 0, y: -1 });
-          }
-        }
+      } else if (this.activeEngine === this.timberEngine) {
+        this.timberEngine.setSteer(0);
       }
     };
 
@@ -365,63 +381,30 @@ export class ArcadeManager {
     this.canvas.addEventListener('touchend', handleTouchEnd, { passive: false });
     this.canvas.addEventListener('touchcancel', handleTouchEnd, { passive: false });
 
-    // Mouse drag support
-    let isMouseDown = false;
-    let mouseStartX = 0;
-    let mouseStartY = 0;
-
-    this.canvas.addEventListener('mousedown', (e) => {
-      if (!this.activeEngine) return;
-      getAudioContext();
-      if (this.activeEngine === this.clockworkEngine) {
-        this.clockworkEngine.handlePressDown();
-      } else if (this.activeEngine === this.haulerEngine) {
-        if (!this.haulerEngine.isRunning || this.haulerEngine.isOver) {
-          this.hideOverlay();
-          this.haulerEngine.start();
-        } else {
-          isMouseDown = true;
-          mouseStartX = e.clientX;
-          mouseStartY = e.clientY;
-        }
-      }
-    });
-
-    window.addEventListener('mousemove', (e) => {
-      if (!isMouseDown || !this.activeEngine || this.activeEngine !== this.haulerEngine) return;
-      const deltaX = e.clientX - mouseStartX;
-      const deltaY = e.clientY - mouseStartY;
-      const absX = Math.abs(deltaX);
-      const absY = Math.abs(deltaY);
-
-      if (Math.max(absX, absY) >= SWIPE_THRESHOLD) {
-        if (absX > absY) {
-          this.haulerEngine.setDirection(deltaX > 0 ? { x: 1, y: 0 } : { x: -1, y: 0 });
-        } else {
-          this.haulerEngine.setDirection(deltaY > 0 ? { x: 0, y: 1 } : { x: 0, y: -1 });
-        }
-        mouseStartX = e.clientX;
-        mouseStartY = e.clientY;
-      }
-    });
-
-    window.addEventListener('mouseup', () => {
-      isMouseDown = false;
-      if (this.activeEngine === this.clockworkEngine) {
-        this.clockworkEngine.handlePressUp();
-      }
-    });
-
     // Virtual D-pad for mobile
     document.querySelectorAll('[data-dpad]').forEach((btn) => {
+      const handleDpad = (dir) => {
+        if (!this.activeEngine) return;
+        if (this.activeEngine === this.haulerEngine) {
+          if (dir === 'up') this.haulerEngine.setDirection({ x: 0, y: -1 });
+          else if (dir === 'down') this.haulerEngine.setDirection({ x: 0, y: 1 });
+          else if (dir === 'left') this.haulerEngine.setDirection({ x: -1, y: 0 });
+          else if (dir === 'right') this.haulerEngine.setDirection({ x: 1, y: 0 });
+        } else if (this.activeEngine === this.drillEngine) {
+          if (dir === 'left') this.drillEngine.moveLeft();
+          else if (dir === 'right') this.drillEngine.moveRight();
+        } else if (this.activeEngine === this.timberEngine) {
+          if (dir === 'left') this.timberEngine.setSteer(-1);
+          else if (dir === 'right') this.timberEngine.setSteer(1);
+        } else if (this.activeEngine === this.neonEngine) {
+          if (dir === 'left') this.neonEngine.moveLeft();
+          else if (dir === 'right') this.neonEngine.moveRight();
+        }
+      };
+
       btn.addEventListener('click', (e) => {
         e.preventDefault();
-        if (!this.activeEngine || this.activeEngine !== this.haulerEngine) return;
-        const dir = btn.dataset.dpad;
-        if (dir === 'up') this.haulerEngine.setDirection({ x: 0, y: -1 });
-        else if (dir === 'down') this.haulerEngine.setDirection({ x: 0, y: 1 });
-        else if (dir === 'left') this.haulerEngine.setDirection({ x: -1, y: 0 });
-        else if (dir === 'right') this.haulerEngine.setDirection({ x: 1, y: 0 });
+        handleDpad(btn.dataset.dpad);
       });
     });
 
@@ -454,6 +437,48 @@ export class ArcadeManager {
           e.preventDefault();
           this.haulerEngine.setDirection({ x: 1, y: 0 });
         }
+      } else if (this.activeEngine === this.drillEngine) {
+        if (key === 'arrowleft' || key === 'a') {
+          e.preventDefault();
+          this.drillEngine.moveLeft();
+        } else if (key === 'arrowright' || key === 'd') {
+          e.preventDefault();
+          this.drillEngine.moveRight();
+        } else if (e.code === 'Space') {
+          e.preventDefault();
+          if (!this.drillEngine.isRunning || this.drillEngine.isOver) {
+            this.hideOverlay();
+            this.drillEngine.start();
+          }
+        }
+      } else if (this.activeEngine === this.timberEngine) {
+        if (key === 'arrowleft' || key === 'a') {
+          e.preventDefault();
+          this.timberEngine.setSteer(-1);
+        } else if (key === 'arrowright' || key === 'd') {
+          e.preventDefault();
+          this.timberEngine.setSteer(1);
+        } else if (e.code === 'Space') {
+          e.preventDefault();
+          if (!this.timberEngine.isRunning || this.timberEngine.isOver) {
+            this.hideOverlay();
+            this.timberEngine.start();
+          }
+        }
+      } else if (this.activeEngine === this.neonEngine) {
+        if (key === 'arrowleft' || key === 'a') {
+          e.preventDefault();
+          this.neonEngine.moveLeft();
+        } else if (key === 'arrowright' || key === 'd') {
+          e.preventDefault();
+          this.neonEngine.moveRight();
+        } else if (e.code === 'Space') {
+          e.preventDefault();
+          if (!this.neonEngine.isRunning || this.neonEngine.isOver) {
+            this.hideOverlay();
+            this.neonEngine.start();
+          }
+        }
       }
 
       if (key === 'escape') {
@@ -466,6 +491,11 @@ export class ArcadeManager {
         const key = e.key.toLowerCase();
         if (e.code === 'Space' || key === 'arrowup' || key === 'w') {
           this.clockworkEngine.handlePressUp();
+        }
+      } else if (this.activeEngine === this.timberEngine) {
+        const key = e.key.toLowerCase();
+        if (key === 'arrowleft' || key === 'a' || key === 'arrowright' || key === 'd') {
+          this.timberEngine.setSteer(0);
         }
       }
     });

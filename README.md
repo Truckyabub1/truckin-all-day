@@ -14,17 +14,17 @@ High-impact country-meets-rock music label platform, interactive cartoon arcade 
    - Lazy-loaded embedded Spotify players and direct links to Spotify, Apple Music, YouTube Music, Amazon Music, and Deezer.
    - Genre filtering (Southern Rock, Steampunk/Synth, Mining/Americana).
 
-2. **Isolated Dual Artist Arcade**
+2. **5-Artist Custom Vector Arcade Platform**
    - **Gear Runner (CLOCKWORK HARE):** Steampunk rabbit platformer with cog hopping, brass carrot collecting, and helicopter hover mechanics.
-   - **Heavy Dirt Hauler (Keep on Truckin' 24 7):** Construction convoy snake game with equipment pickups (excavators, cranes, steamrollers, tankers) and virtual d-pad controls.
-   - Built-in Web Audio API procedural sound synthesizer with persistent mute toggle and high scores stored in `localStorage`.
+   - **Heavy Dirt Hauler (Keep on Truckin' 24 7):** Construction convoy snake game with highway semi steering and trailer hitching.
+   - **Ore Drill Rush (Iron Stallion Mining Music):** Subterranean 3-track rail drill cart, mining ore chunks with spark physics while dodging stalactites.
+   - **Timber Hollow Trail (Harlan Echo):** Appalachian night drive in a vintage 1970s pickup truck with dynamic headlights, dodging fallen timber and collecting vinyl records.
+   - **Neon Highway 120 (Subzero Pulsewavez):** 120 MPH synthwave speeder with wireframe perspective horizon, neon sun, cyber interceptor, pulse energy gates, and traffic dodging.
+   - **Universal Vector Engine:** 100% procedural 2D vector graphics (0 emoji font bugs) with HiDPI Retina scaling, procedural Web Audio synthesizer, touch swipe, virtual D-pad, and localStorage high score tracking.
 
-3. **Official Merch Store & Modal**
-   - Vinyl records, tour tees, snapback caps, and collector enamel pins with quick-view modal and size selectors.
-   - Configurable external checkout URL via environment variables.
-
-4. **Convoy Fan Club (Netlify Forms)**
-   - Ajax-based newsletter signup utilizing native Netlify form processing with honeypot spam protection.
+3. **Official Fourthwall Storefront Showcase**
+   - Direct integration pointing to official merchandise supply: `https://the-purple-vixon-shop.fourthwall.com`.
+   - Worldwide shipping, tour apparel, vinyl pressings, and accessories.
 
 ---
 

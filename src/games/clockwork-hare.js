@@ -269,31 +269,97 @@ export class ClockworkHareEngine {
       ctx.fill();
     });
 
-    // Obstacle Gears
+    // Obstacle Gears (Pure Vector 8-Tooth Mechanical Cogs)
     this.gears.forEach((g) => {
       ctx.save();
       ctx.translate(g.x, g.y);
-      ctx.rotate(-Date.now() * 0.005);
-      ctx.fillStyle = '#ff3366';
+      ctx.rotate(-Date.now() * 0.004);
+
+      // Outer teeth
+      ctx.fillStyle = '#ff2a5f';
+      ctx.strokeStyle = '#ffeef2';
+      ctx.lineWidth = 1.5;
+      const teeth = 8;
+      for (let t = 0; t < teeth; t++) {
+        ctx.save();
+        ctx.rotate((t * Math.PI * 2) / teeth);
+        ctx.beginPath();
+        ctx.rect(-5, -g.radius - 6, 10, 8);
+        ctx.fill();
+        ctx.stroke();
+        ctx.restore();
+      }
+
+      // Main Cog Body
+      const cogGrad = ctx.createRadialGradient(0, 0, 4, 0, 0, g.radius);
+      cogGrad.addColorStop(0, '#ff6b8b');
+      cogGrad.addColorStop(0.7, '#cc1240');
+      cogGrad.addColorStop(1, '#800620');
+      ctx.fillStyle = cogGrad;
       ctx.beginPath();
       ctx.arc(0, 0, g.radius, 0, Math.PI * 2);
       ctx.fill();
-      ctx.strokeStyle = '#fff';
+      ctx.strokeStyle = '#ffa8be';
+      ctx.stroke();
+
+      // Inner Hub & Rivets
+      ctx.fillStyle = '#1c0308';
+      ctx.beginPath();
+      ctx.arc(0, 0, g.radius * 0.45, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.strokeStyle = '#ff99b0';
       ctx.lineWidth = 2;
       ctx.stroke();
-      ctx.font = '24px sans-serif';
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      ctx.fillText('⚙️', 0, 0);
+
+      // Center brass axle
+      ctx.fillStyle = '#ffd166';
+      ctx.beginPath();
+      ctx.arc(0, 0, 4, 0, Math.PI * 2);
+      ctx.fill();
       ctx.restore();
     });
 
-    // Collectible Carrots
+    // Collectible Carrots (Pure Vector Golden Brass Carrots)
     this.carrots.forEach((c) => {
-      ctx.font = `${c.size}px sans-serif`;
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      ctx.fillText('🥕', c.x, c.y);
+      ctx.save();
+      ctx.translate(c.x, c.y);
+      // Ambient glow
+      ctx.shadowColor = '#f59e0b';
+      ctx.shadowBlur = 12;
+
+      // Green leafy top
+      ctx.fillStyle = '#10b981';
+      ctx.beginPath();
+      ctx.ellipse(-3, -c.size * 0.55, 4, 8, -0.3, 0, Math.PI * 2);
+      ctx.ellipse(3, -c.size * 0.55, 4, 8, 0.3, 0, Math.PI * 2);
+      ctx.ellipse(0, -c.size * 0.65, 3, 9, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Carrot body
+      const cGrad = ctx.createLinearGradient(-c.size * 0.3, 0, c.size * 0.3, c.size);
+      cGrad.addColorStop(0, '#ffd166');
+      cGrad.addColorStop(0.6, '#f59e0b');
+      cGrad.addColorStop(1, '#d97706');
+      ctx.fillStyle = cGrad;
+      ctx.beginPath();
+      ctx.moveTo(-c.size * 0.35, -c.size * 0.3);
+      ctx.lineTo(c.size * 0.35, -c.size * 0.3);
+      ctx.lineTo(0, c.size * 0.6);
+      ctx.closePath();
+      ctx.fill();
+      ctx.strokeStyle = '#fff';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+
+      // Horizontal carrot ribs
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
+      ctx.beginPath();
+      ctx.moveTo(-c.size * 0.2, -c.size * 0.05);
+      ctx.lineTo(c.size * 0.2, -c.size * 0.05);
+      ctx.moveTo(-c.size * 0.15, c.size * 0.2);
+      ctx.lineTo(c.size * 0.15, c.size * 0.2);
+      ctx.stroke();
+      ctx.restore();
     });
 
     // Draw Steampunk Bunny
