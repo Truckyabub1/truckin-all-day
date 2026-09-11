@@ -1,0 +1,17 @@
+{
+  "name": "Truckin all Day — Official Label & Arcade",
+  "short_name": "Truckin all Day",
+  "description": "High-impact country-rock music label drops, artist streaming previews, official merchandise, and custom interactive arcade games.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#090a0f",
+  "theme_color": "#090a0f",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,230 @@
+@import './variables.css';
+
+/* ── MERCH GRID & CARDS ─────────────────────────────────── */
+.merch-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.merch-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  backdrop-filter: blur(16px);
+  transition: transform var(--transition-normal), border-color var(--transition-normal), box-shadow var(--transition-normal);
+  position: relative;
+}
+
+.merch-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(245, 158, 11, 0.4);
+  box-shadow: var(--shadow-amber);
+}
+
+.merch-visual {
+  height: 220px;
+  background: linear-gradient(135deg, #161b2a, #0b0d14);
+  display: grid;
+  place-items: center;
+  position: relative;
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 1rem;
+}
+
+.merch-icon-preview {
+  font-size: 5rem;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.6));
+  transition: transform var(--transition-normal);
+}
+
+.merch-card:hover .merch-icon-preview {
+  transform: scale(1.1) rotate(4deg);
+}
+
+.merch-badge-pos {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+}
+
+.merch-price-tag {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  background: rgba(0, 0, 0, 0.75);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-pill);
+  padding: 0.35rem 0.85rem;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--amber-primary);
+  font-size: 0.95rem;
+  backdrop-filter: blur(8px);
+}
+
+.merch-info {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.merch-artist-tag {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--cyan-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.merch-title {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--text-pure);
+  line-height: 1.3;
+}
+
+.merch-desc {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.merch-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+/* ── MERCH QUICK-VIEW MODAL ─────────────────────────────── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(12px);
+  z-index: 200;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-normal);
+}
+
+.modal-overlay.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-lg);
+  max-width: 620px;
+  width: 100%;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  box-shadow: var(--shadow-lg), 0 0 60px rgba(0, 242, 254, 0.2);
+  position: relative;
+  transform: scale(0.95);
+  transition: transform var(--transition-normal);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.modal-overlay.is-open .modal-card {
+  transform: scale(1);
+}
+
+.modal-close {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border-subtle);
+  display: grid;
+  place-items: center;
+  color: var(--text-primary);
+  font-size: 1.25rem;
+  line-height: 1;
+  transition: all var(--transition-fast);
+}
+
+.modal-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  transform: rotate(90deg);
+}
+
+.modal-header-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.modal-icon {
+  font-size: 3.5rem;
+  width: 72px;
+  height: 72px;
+  border-radius: var(--radius-md);
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--border-subtle);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.modal-title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-pure);
+  line-height: 1.2;
+}
+
+.modal-price {
+  font-family: var(--font-mono);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--amber-primary);
+}
+
+.size-select-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.size-options {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.size-pill {
+  padding: 0.4rem 0.9rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-medium);
+  background: rgba(255, 255, 255, 0.04);
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: all var(--transition-fast);
+}
+
+.size-pill:hover,
+.size-pill.active {
+  background: var(--cyan-subtle);
+  border-color: var(--cyan-primary);
+  color: var(--cyan-primary);
+}

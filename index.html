@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>Truckin all Day • Official Label Platform, Artist Roster & Arcade</title>
+  
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="Truckin all Day • Official Label Platform, Artist Roster & Arcade" />
+  <meta name="description" content="High-impact country-rock music label drops, exclusive artist streaming previews, official merchandise, and interactive cartoon arcade games." />
+  <meta name="keywords" content="Truckin all Day, Clockwork Hare, Keep on Truckin 24 7, Iron Stallion Mining Music, Harlan Echo, Subzero Pulsewavez, indie record label, outlaw country, southern rock, synthwave, arcade games" />
+  <meta name="author" content="Truckin all Day" />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#090a0f" />
+  <link rel="canonical" href="https://truckinallday.netlify.app/" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://truckinallday.netlify.app/" />
+  <meta property="og:title" content="Truckin all Day • Official Label Platform & Artist Arcade" />
+  <meta property="og:description" content="High-impact country-rock label storytelling, streaming previews across 5 signature artists, official merch, and custom interactive games." />
+  <meta property="og:image" content="https://truckinallday.netlify.app/favicon.svg" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://truckinallday.netlify.app/" />
+  <meta name="twitter:title" content="Truckin all Day • Official Label Platform & Artist Arcade" />
+  <meta name="twitter:description" content="High-impact country-rock label storytelling, streaming previews across 5 signature artists, official merch, and custom interactive games." />
+  <meta name="twitter:image" content="https://truckinallday.netlify.app/favicon.svg" />
+
+  <!-- Icons & Manifest -->
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/favicon.svg" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <!-- Google Fonts Preconnect & Stylesheet -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&family=Space+Mono:wght@700&family=Syne:wght@700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="/src/styles/main.css" />
+  <link rel="stylesheet" href="/src/styles/arcade.css" />
+  <link rel="stylesheet" href="/src/styles/merch.css" />
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "MusicGroup",
+        "@id": "https://truckinallday.netlify.app/#recordlabel",
+        "name": "Truckin all Day",
+        "url": "https://truckinallday.netlify.app/",
+        "logo": "https://truckinallday.netlify.app/favicon.svg",
+        "description": "Independent country, rock, steampunk, and synthwave music label platform featuring 5 signature artists and custom arcade games.",
+        "genre": ["Outlaw Country", "Southern Rock", "Steampunk", "Synthwave", "Industrial Americana"],
+        "member": [
+          { "@type": "MusicGroup", "name": "CLOCKWORK HARE" },
+          { "@type": "MusicGroup", "name": "Keep on Truckin' 24 7" },
+          { "@type": "MusicGroup", "name": "Iron Stallion Mining Music" },
+          { "@type": "MusicGroup", "name": "Harlan Echo" },
+          { "@type": "MusicGroup", "name": "Subzero Pulsewavez" }
+        ]
+      },
+      {
+        "@type": "WebApplication",
+        "@id": "https://truckinallday.netlify.app/#arcade",
+        "name": "Truckin all Day Artist Arcade",
+        "applicationCategory": "GameApplication",
+        "operatingSystem": "All modern browsers",
+        "browserRequirements": "Requires HTML5 Canvas and Web Audio API support"
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <!-- Skip link for keyboard accessibility -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Header & Navigation Shell -->
+  <header class="site-header" id="siteHeader">
+    <div class="container header-inner">
+      <a href="#hero" class="brand-link" aria-label="Truckin all Day Home">
+        <div class="brand-logo-icon" aria-hidden="true">🚚</div>
+        <span class="brand-text">Truckin all Day</span>
+      </a>
+
+      <nav class="desktop-nav" aria-label="Primary site navigation">
+        <a href="#hero" class="nav-item active">Home</a>
+        <a href="#music" class="nav-item">Roster</a>
+        <a href="#arcade" class="nav-item">Arcade</a>
+        <a href="#merch" class="nav-item">Merch</a>
+        <a href="#about" class="nav-item">About</a>
+        <a href="#newsletter" class="nav-item">Fan Club</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="#music" class="btn btn-primary btn-sm">Stream Music 🎵</a>
+        <button class="mobile-toggle" id="mobileMenuToggle" type="button" aria-label="Toggle mobile menu" aria-expanded="false" aria-controls="mobileDrawer">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <div class="mobile-backdrop" id="mobileBackdrop" aria-hidden="true"></div>
+  <aside class="mobile-drawer" id="mobileDrawer" aria-label="Mobile navigation drawer">
+    <nav class="mobile-nav-links">
+      <a href="#hero" class="mobile-nav-link active">🏠 Home</a>
+      <a href="#music" class="mobile-nav-link">🎸 Artist Roster</a>
+      <a href="#arcade" class="mobile-nav-link">🕹️ Arcade Hub</a>
+      <a href="#merch" class="mobile-nav-link">🛍️ Official Merch</a>
+      <a href="#about" class="mobile-nav-link">📖 About Label</a>
+      <a href="#newsletter" class="mobile-nav-link">✉️ Convoy Club</a>
+    </nav>
+    <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+      <a href="#music" class="btn btn-primary" style="width: 100%;">Listen Now ▶</a>
+      <p style="font-size: 0.75rem; color: var(--text-muted); text-align: center;">© 2026 Truckin all Day Label</p>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main id="main-content">
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="container hero-content">
+        <span class="section-tag">⚡ OFFICIAL RECORD LABEL PLATFORM</span>
+        <h1 class="hero-title">
+          Truckin all Day <br />
+          <span class="hero-title-accent">Soundtracks for the Open Road</span>
+        </h1>
+        <p class="hero-subtitle">
+          High-impact country-meets-rock storytelling, heavyweight industrial anthems, exclusive artist releases, and custom interactive games built for fans and road warriors worldwide.
+        </p>
+
+        <div class="hero-cta-group">
+          <a href="#music" class="btn btn-primary">Explore 5 Artists ▶</a>
+          <a href="#arcade" class="btn btn-amber">Play Arcade Hub 🕹️</a>
+          <a href="#merch" class="btn btn-secondary">Shop Merch 🛍️</a>
+        </div>
+
+        <!-- Live Label Stats -->
+        <div class="stats-strip" aria-label="Label statistics">
+          <div class="stat-item">
+            <span class="stat-number">5</span>
+            <span class="stat-label">Signature Artists</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">2</span>
+            <span class="stat-label">Custom Arcade Games</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">5</span>
+            <span class="stat-label">Streaming Platforms</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">100%</span>
+            <span class="stat-label">Independent</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Music & Artist Roster Section -->
+    <section class="section-wrapper" id="music">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">FEATURED ROSTER</span>
+          <h2 class="section-title">Artists & Discography</h2>
+          <p class="section-desc">
+            Stream official releases directly on Spotify or jump straight into your preferred music streaming service.
+          </p>
+        </div>
+
+        <!-- Genre Filter Bar -->
+        <div class="filter-bar" id="artistFilterBar" role="tablist" aria-label="Filter artists by genre">
+          <button class="filter-btn active" data-filter="all" type="button" role="tab" aria-selected="true">All Roster (5)</button>
+          <button class="filter-btn" data-filter="rock" type="button" role="tab" aria-selected="false">Southern Rock & Outlaw</button>
+          <button class="filter-btn" data-filter="steampunk" type="button" role="tab" aria-selected="false">Steampunk & Synth</button>
+          <button class="filter-btn" data-filter="mining" type="button" role="tab" aria-selected="false">Industrial Mining & Americana</button>
+        </div>
+
+        <!-- Artist Cards Grid (Rendered via main.js) -->
+        <div class="artist-grid" id="artistGrid" aria-live="polite">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Arcade Section -->
+    <section class="section-wrapper" id="arcade" style="background: radial-gradient(circle at center, rgba(0, 242, 254, 0.04), transparent 70%);">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag" style="background: var(--cyan-subtle); color: var(--cyan-primary); border-color: var(--border-glow);">OFFICIAL RETRO ARCADE</span>
+          <h2 class="section-title">Artist Arcade Hub</h2>
+          <p class="section-desc">
+            Play custom mini-games crafted for our headline artists with isolated physics, procedural audio synthesizer, touch gestures, and high-score tracking.
+          </p>
+        </div>
+
+        <!-- Arcade Lobby (Game Selectors) -->
+        <div class="arcade-lobby-grid" id="arcadeLobby">
+          <!-- Game 1: Clockwork Hare -->
+          <article class="arcade-card">
+            <div>
+              <div class="arcade-card-header">
+                <div class="arcade-icon" aria-hidden="true">🐰⚙️</div>
+                <div class="arcade-card-info">
+                  <span class="arcade-tag">Artist: CLOCKWORK HARE</span>
+                  <h3 class="arcade-card-title">Gear Runner</h3>
+                </div>
+              </div>
+              <p class="arcade-card-desc">
+                Guide the mechanical steampunk rabbit across turning brass cogs! Collect brass carrots, jump over obstacles, and hold down mid-air to deploy spinning helicopter ears to glide to safety.
+              </p>
+            </div>
+            <div class="arcade-card-footer">
+              <span class="card-high-score">Cabinet Best: <strong id="clockworkCardHighScore">0</strong></span>
+              <button class="btn btn-primary" data-launch="clockwork" type="button">Launch Game ▶</button>
+            </div>
+          </article>
+
+          <!-- Game 2: Keep on Truckin' -->
+          <article class="arcade-card">
+            <div>
+              <div class="arcade-card-header">
+                <div class="arcade-icon" aria-hidden="true">🚚🏗️</div>
+                <div class="arcade-card-info">
+                  <span class="arcade-tag">Artist: Keep on Truckin' 24 7</span>
+                  <h3 class="arcade-card-title">Heavy Dirt Hauler</h3>
+                </div>
+              </div>
+              <p class="arcade-card-desc">
+                Classic heavy-equipment convoy snake! Steer the heavy diesel truck to collect rock loads. Each pickup attaches excavators, cranes, steamrollers, and fuel tankers to your train.
+              </p>
+            </div>
+            <div class="arcade-card-footer">
+              <span class="card-high-score">Cabinet Best: <strong id="haulerCardHighScore">0</strong></span>
+              <button class="btn btn-primary" data-launch="hauler" type="button">Launch Game ▶</button>
+            </div>
+          </article>
+        </div>
+
+        <!-- Active Sandboxed Game Cabinet -->
+        <div class="game-cabinet" id="arcadeCabinet" style="display: none;" role="region" aria-label="Interactive Game Cabinet">
+          <div class="cabinet-nav">
+            <button id="backToLobbyBtn" class="back-btn" type="button">◀ Back to Arcade Hub</button>
+            <div class="game-actions">
+              <button class="game-btn" id="arcadeStartBtn" type="button">Play</button>
+              <button class="game-btn" id="arcadeRestartBtn" type="button">Restart</button>
+              <button class="game-btn" id="arcadeMuteBtn" type="button" aria-label="Mute arcade sound">🔊 Sound: ON</button>
+            </div>
+          </div>
+
+          <div class="game-headline">
+            <h3 class="cabinet-title" id="cabinetTitle">Game Title</h3>
+            <p class="cabinet-desc" id="cabinetDesc">Game instructions</p>
+          </div>
+
+          <div class="game-toolbar">
+            <div class="score-card">
+              <span>Current Score</span>
+              <strong id="arcadeScore">0</strong>
+            </div>
+            <div class="score-card">
+              <span>Cabinet Record</span>
+              <strong id="arcadeHighScore">0</strong>
+            </div>
+          </div>
+
+          <div class="canvas-wrap">
+            <canvas id="arcadeCanvas" width="640" height="640" aria-label="Active arcade game viewport"></canvas>
+            <div class="game-overlay" id="arcadeOverlay" style="display: none;" role="alert">
+              <div class="overlay-content">
+                <span class="overlay-title" id="overlayTitle">GAME OVER</span>
+                <p class="overlay-msg" id="overlayMessage">Tap anywhere or press Space to retry.</p>
+                <button class="btn btn-primary btn-sm" type="button">Play Again 🔁</button>
+              </div>
+            </div>
+          </div>
+
+          <p id="touchHint" class="touch-hint">📱 Touchscreen & Keyboard Controls Ready</p>
+
+          <!-- On-screen Virtual D-Pad for Mobile Snake Game -->
+          <div class="virtual-controls" id="virtualControls" style="display: none;">
+            <div class="dpad-grid" aria-label="Directional controls">
+              <button class="dpad-btn dpad-up" data-dpad="up" type="button" aria-label="Up">⬆️</button>
+              <button class="dpad-btn dpad-left" data-dpad="left" type="button" aria-label="Left">⬅️</button>
+              <button class="dpad-btn dpad-right" data-dpad="right" type="button" aria-label="Right">➡️</button>
+              <button class="dpad-btn dpad-down" data-dpad="down" type="button" aria-label="Down">⬇️</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Official Merch & Store Section -->
+    <section class="section-wrapper" id="merch">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag" style="background: var(--amber-subtle); color: var(--amber-primary); border-color: rgba(245, 158, 11, 0.3);">OFFICIAL LABEL SUPPLY</span>
+          <h2 class="section-title">Merch & Collectibles</h2>
+          <p class="section-desc">
+            Limited vinyl pressings, premium heavy-cotton tour tees, collector enamel pins, and tour accessories.
+          </p>
+        </div>
+
+        <!-- Merch Category Filter -->
+        <div class="filter-bar" id="merchFilterBar" role="tablist" aria-label="Filter merch by category">
+          <button class="filter-btn active" data-merch-filter="all" type="button" role="tab" aria-selected="true">All Items</button>
+          <button class="filter-btn" data-merch-filter="vinyl" type="button" role="tab" aria-selected="false">Vinyl & Music</button>
+          <button class="filter-btn" data-merch-filter="apparel" type="button" role="tab" aria-selected="false">Apparel</button>
+          <button class="filter-btn" data-merch-filter="accessories" type="button" role="tab" aria-selected="false">Accessories & Pins</button>
+        </div>
+
+        <!-- Merch Grid (Rendered via main.js) -->
+        <div class="merch-grid" id="merchGrid" aria-live="polite">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Convoy Fan Club (Newsletter) Section -->
+    <section class="section-wrapper" id="newsletter">
+      <div class="container">
+        <div class="newsletter-card">
+          <span class="section-tag">JOIN THE INNER CIRCLE</span>
+          <h2 class="section-title">The Convoy Fan Club</h2>
+          <p class="section-desc" style="max-width: 620px; margin: 0 auto;">
+            Get VIP early access to secret vinyl drops, arcade tournament leaderboards, unreleased demo tracks, and exclusive discount codes for official merch.
+          </p>
+
+          <!-- Netlify Forms Integration -->
+          <form name="convoy-club" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="newsletter-form" id="newsletterForm">
+            <!-- Hidden inputs for Netlify Form handling -->
+            <input type="hidden" name="form-name" value="convoy-club" />
+            <p style="display: none;">
+              <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+            </p>
+
+            <div class="newsletter-input-group">
+              <input type="email" name="email" class="newsletter-input" placeholder="Enter your email address..." required aria-label="Email address for fan club" />
+              <button type="submit" class="btn btn-primary" id="newsletterSubmitBtn">Join Convoy 🚀</button>
+            </div>
+
+            <div class="newsletter-checkboxes">
+              <label class="checkbox-label">
+                <input type="checkbox" name="pref_music" checked /> New Music Releases
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="pref_merch" checked /> Vinyl & Merch Drops
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="pref_arcade" checked /> Arcade Tournaments
+              </label>
+            </div>
+
+            <div class="form-feedback" id="formFeedback" role="status" aria-live="polite"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- About / Label Story Section -->
+    <section class="section-wrapper" id="about">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">LABEL STORY</span>
+          <h2 class="section-title">Built For The Long Haul</h2>
+          <p class="section-desc">
+            Truckin all Day is an independent record label and creative powerhouse merging high-impact roots music with interactive digital culture.
+          </p>
+        </div>
+
+        <div class="about-grid">
+          <article class="about-card">
+            <div class="about-icon" aria-hidden="true">🛣️</div>
+            <h3>Independent Road Ethos</h3>
+            <p>
+              Born from late-night highway hauls, industrial mining towns, and gritty underground clubs, our artists craft authentic anthems with zero corporate dilution.
+            </p>
+          </article>
+
+          <article class="about-card">
+            <div class="about-icon" aria-hidden="true">🕹️</div>
+            <h3>Interactive Fan Worlds</h3>
+            <p>
+              We believe music should be experienced, not just streamed. Every headline artist release is paired with custom games, interactive lore, and collector art drops.
+            </p>
+          </article>
+
+          <article class="about-card">
+            <div class="about-icon" aria-hidden="true">⚡</div>
+            <h3>Worldwide Reach</h3>
+            <p>
+              Distributed across Spotify, Apple Music, YouTube Music, Amazon, and Deezer, our catalog reaches hundreds of thousands of listeners across North America and beyond.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer" id="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div>
+          <a href="#hero" class="brand-link">
+            <div class="brand-logo-icon" aria-hidden="true">🚚</div>
+            <span class="brand-text">Truckin all Day</span>
+          </a>
+          <p class="footer-brand-desc">
+            The premier independent label for high-impact outlaw country, southern rock, steampunk, and retrowave music releases.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <div class="footer-links">
+            <a href="#hero" class="footer-link">Home</a>
+            <a href="#music" class="footer-link">Artist Roster</a>
+            <a href="#arcade" class="footer-link">Arcade Hub</a>
+            <a href="#merch" class="footer-link">Merch Store</a>
+            <a href="#about" class="footer-link">About Us</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Artist Roster</h4>
+          <div class="footer-links">
+            <a href="#music" class="footer-link">CLOCKWORK HARE</a>
+            <a href="#music" class="footer-link">Keep on Truckin' 24 7</a>
+            <a href="#music" class="footer-link">Iron Stallion Mining</a>
+            <a href="#music" class="footer-link">Harlan Echo</a>
+            <a href="#music" class="footer-link">Subzero Pulsewavez</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Streaming Hubs</h4>
+          <div class="footer-links">
+            <a href="https://open.spotify.com" target="_blank" rel="noopener" class="footer-link">Spotify</a>
+            <a href="https://music.apple.com" target="_blank" rel="noopener" class="footer-link">Apple Music</a>
+            <a href="https://music.youtube.com" target="_blank" rel="noopener" class="footer-link">YouTube Music</a>
+            <a href="https://music.amazon.com" target="_blank" rel="noopener" class="footer-link">Amazon Music</a>
+            <a href="https://www.deezer.com" target="_blank" rel="noopener" class="footer-link">Deezer</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 Truckin all Day. All rights reserved. Built as a high-performance static web platform.</p>
+        <p><a href="#hero" style="color: var(--cyan-primary);">Back to Top ↑</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Merch Quick-View Modal -->
+  <div class="modal-overlay" id="merchModal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modalTitle">
+    <div class="modal-card">
+      <button class="modal-close" id="modalCloseBtn" type="button" aria-label="Close product details">✕</button>
+      <div class="modal-header-row">
+        <div class="modal-icon" id="modalIcon" aria-hidden="true">💿</div>
+        <div>
+          <span class="badge badge-amber" id="modalBadge">COLLECTOR EDITION</span>
+          <h3 class="modal-title" id="modalTitle">Product Title</h3>
+          <p class="modal-price" id="modalPrice">$0.00</p>
+        </div>
+      </div>
+      <p id="modalDesc" style="color: var(--text-secondary); line-height: 1.6; font-size: 0.95rem;">Product description goes here.</p>
+      
+      <div class="size-select-group" id="modalSizeGroup">
+        <span style="font-size: 0.85rem; font-weight: 700; color: var(--text-secondary);">Select Option / Size:</span>
+        <div class="size-options" id="modalSizeOptions"></div>
+      </div>
+
+      <div style="display: flex; gap: 0.75rem; margin-top: 0.5rem;">
+        <a href="#" target="_blank" rel="noopener" class="btn btn-amber" id="modalOrderBtn" style="flex: 1;">Order from Store 🛍️</a>
+        <button class="btn btn-secondary" id="modalDismissBtn" type="button">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Achievement Toast -->
+  <div id="achievementToast" class="achievement-toast" style="display: none;" role="status" aria-live="polite">
+    <span id="toastIcon"></span>
+    <span id="toastText"></span>
+  </div>
+
+  <!-- Main JavaScript Application Bundle -->
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

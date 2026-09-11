@@ -1,0 +1,80 @@
+export const MERCH_ITEMS = [
+  {
+    id: "vinyl-keep-on-truckin",
+    title: "Keep on Truckin' 24 7 — Limited 12\" Heavyweight Vinyl",
+    artist: "Keep on Truckin' 24 7",
+    category: "vinyl",
+    price: 34.99,
+    badge: "COLLECTOR EDITION",
+    tag: "180g Deluxe Smoke Vinyl",
+    iconEmoji: "💿",
+    description: "Pressed on 180-gram smoke-marbled audiophile vinyl. Includes gatefold jacket, metallic foil numbering, custom printed inner sleeve, and instant lossless digital download.",
+    sizes: ["12\" Standard LP"],
+    inStock: true
+  },
+  {
+    id: "tee-clockwork-hare",
+    title: "Clockwork Hare 'Gear Bunny' Vintage Heavyweight Tee",
+    artist: "CLOCKWORK HARE",
+    category: "apparel",
+    price: 29.99,
+    badge: "BESTSELLER",
+    tag: "100% Combed Ring-Spun Cotton",
+    iconEmoji: "👕",
+    description: "Vintage washed charcoal black tee featuring distressed metallic copper & neon cyan 'Gear Runner' rabbit illustration on back with official label chest insignia.",
+    sizes: ["S", "M", "L", "XL", "2XL", "3XL"],
+    inStock: true
+  },
+  {
+    id: "cap-iron-stallion",
+    title: "Iron Stallion Deep-Shaft Heavyweight Snapback",
+    artist: "Iron Stallion Mining Music",
+    category: "apparel",
+    price: 24.99,
+    badge: "NEW DROP",
+    tag: "High-Profile Structured Hat",
+    iconEmoji: "🧢",
+    description: "Tough charcoal twill snapback cap with raised 3D matte gunmetal embroidery, brass grommets, and moisture-wicking sweatband.",
+    sizes: ["One Size Fits Most"],
+    inStock: true
+  },
+  {
+    id: "pins-arcade-collector",
+    title: "Official Truckin all Day Arcade Enamel Pin Set",
+    artist: "All Roster",
+    category: "accessories",
+    price: 18.99,
+    badge: "LIMITED SET",
+    tag: "Hard Enamel 4-Piece Set",
+    iconEmoji: "🎖️",
+    description: "4-piece collector pin set featuring the Brass Helicopter Bunny, Heavy Diesel Hauler, Iron Pickaxe, and Neon Synthwave Cassette with deluxe clutch backings.",
+    sizes: ["Set of 4 Enamel Pins"],
+    inStock: true
+  },
+  {
+    id: "hoodie-subzero-pulse",
+    title: "Subzero Pulsewavez Nocturnal Highway Zip Hoodie",
+    artist: "Subzero Pulsewavez",
+    category: "apparel",
+    price: 54.99,
+    badge: "PREMIUM FLEECE",
+    tag: "Heavyweight 380 GSM",
+    iconEmoji: "🧥",
+    description: "Plush organic cotton fleece with reflective iridescent neon sleeve prints, double-lined hood, thumbhole cuffs, and heavy-duty dual zippers.",
+    sizes: ["S", "M", "L", "XL", "2XL"],
+    inStock: true
+  },
+  {
+    id: "stickers-harlan-echo",
+    title: "Truckin all Day Holographic Die-Cut Sticker Pack",
+    artist: "All Roster",
+    category: "accessories",
+    price: 11.99,
+    badge: "POPULAR",
+    tag: "UV & Weatherproof Vinyl",
+    iconEmoji: "✨",
+    description: "Pack of 8 ultra-durable weatherproof holographic decals featuring all 5 artist emblems, arcade logos, and vintage highway route signs.",
+    sizes: ["Pack of 8 Decals"],
+    inStock: true
+  }
+];
