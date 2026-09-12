@@ -1,4 +1,5 @@
 import { playAudio, startHoverAudio, stopHoverAudio, getAudioContext } from './audio.js';
+import { getStorageNumber, setStorageNumber } from './storage.js';
 
 export const LOGICAL_WIDTH = 640;
 export const LOGICAL_HEIGHT = 640;
@@ -40,7 +41,7 @@ export class ClockworkHareEngine {
   }
 
   init() {
-    this.highScore = Number(localStorage.getItem(this.storageKey)) || 0;
+    this.highScore = getStorageNumber(this.storageKey, 0);
     this.highScoreBroken = false;
   }
 
@@ -204,7 +205,7 @@ export class ClockworkHareEngine {
     if (this.score > this.highScore) {
       const isFirstBreak = !this.highScoreBroken && this.highScore > 0;
       this.highScore = this.score;
-      localStorage.setItem(this.storageKey, String(this.highScore));
+      setStorageNumber(this.storageKey, this.highScore);
       if (isFirstBreak) {
         this.highScoreBroken = true;
         playAudio('highscore');

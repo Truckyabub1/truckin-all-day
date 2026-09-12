@@ -469,13 +469,25 @@
 
           <p id="touchHint" class="touch-hint">📱 Touchscreen & Keyboard Controls Ready</p>
 
-          <!-- On-screen Virtual D-Pad for Mobile Snake Game -->
+          <!-- Contextual On-Screen Virtual Controls for Mobile & Touchscreens -->
           <div class="virtual-controls" id="virtualControls" style="display: none;">
-            <div class="dpad-grid" aria-label="Directional controls">
-              <button class="dpad-btn dpad-up" data-dpad="up" type="button" aria-label="Up">⬆️</button>
-              <button class="dpad-btn dpad-left" data-dpad="left" type="button" aria-label="Left">⬅️</button>
-              <button class="dpad-btn dpad-right" data-dpad="right" type="button" aria-label="Right">➡️</button>
-              <button class="dpad-btn dpad-down" data-dpad="down" type="button" aria-label="Down">⬇️</button>
+            <!-- 4-Way D-Pad for Heavy Dirt Hauler -->
+            <div class="dpad-grid" id="dpadControls" style="display: none;" aria-label="Directional D-pad">
+              <button class="dpad-btn dpad-up" data-dpad="up" type="button" aria-label="Steer Up">⬆️</button>
+              <button class="dpad-btn dpad-left" data-dpad="left" type="button" aria-label="Steer Left">⬅️</button>
+              <button class="dpad-btn dpad-right" data-dpad="right" type="button" aria-label="Steer Right">➡️</button>
+              <button class="dpad-btn dpad-down" data-dpad="down" type="button" aria-label="Steer Down">⬇️</button>
+            </div>
+
+            <!-- Dual Left/Right Steer for Ore Drill, Timber Trail, & Neon Highway -->
+            <div class="virtual-steer-group" id="steerControls" style="display: none;" aria-label="Steering controls">
+              <button class="steer-btn" data-steer="left" type="button" aria-label="Steer Left">⬅️ STEER LEFT</button>
+              <button class="steer-btn" data-steer="right" type="button" aria-label="Steer Right">STEER RIGHT ➡️</button>
+            </div>
+
+            <!-- Jump & Hover Action Button for Clockwork Hare -->
+            <div class="virtual-action-group" id="actionControls" style="display: none;" aria-label="Action controls">
+              <button class="action-btn" id="actionBtn" type="button" aria-label="Jump and Hover">🦘 TAP / HOLD TO HOVER 🚁</button>
             </div>
           </div>
         </div>

@@ -303,38 +303,43 @@ canvas#arcadeCanvas {
   font-weight: 600;
 }
 
-/* Virtual D-pad for mobile */
+/* Virtual Touch Controls for Mobile & Touchscreen Devices */
 .virtual-controls {
-  display: none;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 0.5rem;
-  margin-top: 0.5rem;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+  width: 100%;
 }
 
 .dpad-grid {
   display: grid;
-  grid-template-columns: repeat(3, 54px);
-  grid-template-rows: repeat(3, 54px);
-  gap: 6px;
+  grid-template-columns: repeat(3, 58px);
+  grid-template-rows: repeat(3, 58px);
+  gap: 8px;
 }
 
 .dpad-btn {
   background: rgba(255, 255, 255, 0.08);
-  border: 1px solid var(--border-medium);
+  border: 1.5px solid var(--border-medium);
   border-radius: var(--radius-md);
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   display: grid;
   place-items: center;
   color: var(--text-primary);
   user-select: none;
-  touch-action: manipulation;
+  -webkit-user-select: none;
+  touch-action: none;
+  transition: transform 0.08s ease, background 0.08s ease;
 }
 
-.dpad-btn:active {
+.dpad-btn:active, .dpad-btn.active {
   background: var(--cyan-primary);
   color: #000;
-  transform: scale(0.95);
+  transform: scale(0.94);
+  box-shadow: 0 0 15px rgba(0, 242, 254, 0.6);
 }
 
 .dpad-up { grid-column: 2; grid-row: 1; }
@@ -342,8 +347,75 @@ canvas#arcadeCanvas {
 .dpad-right { grid-column: 3; grid-row: 2; }
 .dpad-down { grid-column: 2; grid-row: 3; }
 
-@media (max-width: 768px) {
-  .virtual-controls {
-    display: flex;
-  }
+/* 2-Button Steer Layout for Drill / Timber / Neon */
+.virtual-steer-group {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 480px;
+}
+
+.steer-btn {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 1.1rem 1.5rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1.5px solid var(--border-medium);
+  border-radius: var(--radius-pill);
+  color: var(--text-pure);
+  font-size: 1.05rem;
+  font-weight: 800;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.08s ease, background 0.08s ease;
+}
+
+.steer-btn:active, .steer-btn.active {
+  background: var(--cyan-primary);
+  color: #050b14;
+  transform: scale(0.95);
+  box-shadow: 0 0 20px rgba(0, 242, 254, 0.6);
+}
+
+/* Action Button Layout for Clockwork Hare */
+.virtual-action-group {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 380px;
+}
+
+.action-btn {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1.25rem 2rem;
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.25), rgba(255, 107, 253, 0.25));
+  border: 2px solid var(--amber-primary);
+  border-radius: var(--radius-pill);
+  color: var(--text-pure);
+  font-size: 1.15rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
+  box-shadow: 0 0 25px rgba(245, 158, 11, 0.3);
+  transition: transform 0.08s ease, box-shadow 0.08s ease;
+}
+
+.action-btn:active, .action-btn.active {
+  background: var(--amber-primary);
+  color: #050b14;
+  transform: scale(0.96);
+  box-shadow: 0 0 35px rgba(245, 158, 11, 0.75);
 }

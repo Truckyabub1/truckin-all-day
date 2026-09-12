@@ -1,4 +1,5 @@
 import { playAudio, getAudioContext } from './audio.js';
+import { getStorageNumber, setStorageNumber } from './storage.js';
 
 export const LOGICAL_WIDTH = 640;
 export const LOGICAL_HEIGHT = 640;
@@ -35,7 +36,7 @@ export class OreDrillRushEngine {
   }
 
   init() {
-    this.highScore = Number(localStorage.getItem(this.storageKey)) || 0;
+    this.highScore = getStorageNumber(this.storageKey, 0);
     this.highScoreBroken = false;
   }
 
@@ -90,7 +91,7 @@ export class OreDrillRushEngine {
     if (this.score > this.highScore) {
       const isFirstBreak = !this.highScoreBroken && this.highScore > 0;
       this.highScore = this.score;
-      localStorage.setItem(this.storageKey, String(this.highScore));
+      setStorageNumber(this.storageKey, this.highScore);
       if (isFirstBreak) {
         this.highScoreBroken = true;
         playAudio('highscore');
@@ -117,12 +118,16 @@ export class OreDrillRushEngine {
     // Difficulty scaling
     this.scrollSpeed = Math.min(10.5, 5.2 + Math.floor(this.score / 300) * 0.4);
 
-    // Spawn items
+    // Spawn items with fair lane protection
     this.spawnTimer += delta;
     if (this.spawnTimer > Math.max(550, 1100 - Math.floor(this.score / 250) * 50)) {
       this.spawnTimer = 0;
       const lane = Math.floor(Math.random() * 3);
-      const isHazard = Math.random() > 0.42;
+      
+      // Check recent stalactite lanes in top zone to ensure at least one navigable lane
+      const recentHazards = this.items.filter(it => it.type === 'stalactite' && it.y < 120).map(it => it.lane);
+      const isBlocked = recentHazards.length >= 2;
+      const isHazard = !isBlocked && (Math.random() > 0.45);
 
       this.items.push({
         lane,

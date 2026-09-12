@@ -1,4 +1,5 @@
 import { playAudio, getAudioContext } from './audio.js';
+import { getStorageNumber, setStorageNumber } from './storage.js';
 
 export const LOGICAL_WIDTH = 640;
 export const LOGICAL_HEIGHT = 640;
@@ -36,7 +37,7 @@ export class TimberHollowTrailEngine {
   }
 
   init() {
-    this.highScore = Number(localStorage.getItem(this.storageKey)) || 0;
+    this.highScore = getStorageNumber(this.storageKey, 0);
     this.highScoreBroken = false;
   }
 
@@ -77,7 +78,7 @@ export class TimberHollowTrailEngine {
     if (this.score > this.highScore) {
       const isFirstBreak = !this.highScoreBroken && this.highScore > 0;
       this.highScore = this.score;
-      localStorage.setItem(this.storageKey, String(this.highScore));
+      setStorageNumber(this.storageKey, this.highScore);
       if (isFirstBreak) {
         this.highScoreBroken = true;
         playAudio('highscore');
@@ -115,12 +116,27 @@ export class TimberHollowTrailEngine {
     this.roadStripeOffset = (this.roadStripeOffset + this.speed) % 50;
     this.speed = Math.min(10.0, 5.6 + Math.floor(this.score / 350) * 0.45);
 
-    // Spawning hazards & vinyl crates
+    // Spawning hazards & vinyl crates with fair corridor guarantee
     this.spawnTimer += delta;
     if (this.spawnTimer > Math.max(600, 1150 - Math.floor(this.score / 200) * 45)) {
       this.spawnTimer = 0;
-      const spawnX = this.roadLeft + 35 + Math.random() * (this.roadRight - this.roadLeft - 70);
-      const isHazard = Math.random() > 0.38;
+      let spawnX = this.roadLeft + 35 + Math.random() * (this.roadRight - this.roadLeft - 70);
+      
+      // Ensure we don't block the road if another obstacle is at the top
+      const recentObs = this.obstacles.filter(o => o.y < 120);
+      let isHazard = Math.random() > 0.38;
+
+      if (recentObs.length > 0) {
+        // Find existing obstacle X and guarantee at least 95px gap for truck passage
+        const closeX = recentObs[0].x;
+        if (Math.abs(spawnX - closeX) < 95) {
+          if (closeX > (this.roadLeft + this.roadRight) / 2) {
+            spawnX = Math.max(this.roadLeft + 40, closeX - 110);
+          } else {
+            spawnX = Math.min(this.roadRight - 40, closeX + 110);
+          }
+        }
+      }
 
       if (isHazard) {
         this.obstacles.push({

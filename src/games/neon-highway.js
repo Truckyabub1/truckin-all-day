@@ -1,4 +1,5 @@
 import { playAudio, getAudioContext } from './audio.js';
+import { getStorageNumber, setStorageNumber } from './storage.js';
 
 export const LOGICAL_WIDTH = 640;
 export const LOGICAL_HEIGHT = 640;
@@ -34,7 +35,7 @@ export class NeonHighwayEngine {
   }
 
   init() {
-    this.highScore = Number(localStorage.getItem(this.storageKey)) || 0;
+    this.highScore = getStorageNumber(this.storageKey, 0);
     this.highScoreBroken = false;
   }
 
@@ -92,7 +93,7 @@ export class NeonHighwayEngine {
     if (this.score > this.highScore) {
       const isFirstBreak = !this.highScoreBroken && this.highScore > 0;
       this.highScore = this.score;
-      localStorage.setItem(this.storageKey, String(this.highScore));
+      setStorageNumber(this.storageKey, this.highScore);
       if (isFirstBreak) {
         this.highScoreBroken = true;
         playAudio('highscore');
@@ -124,12 +125,16 @@ export class NeonHighwayEngine {
 
     this.gridOffset = (this.gridOffset + this.speed) % 40;
 
-    // Spawn traffic & pulse gates
+    // Spawn traffic & pulse gates with lane clearance guarantee
     this.spawnTimer += delta;
     if (this.spawnTimer > Math.max(500, 1050 - Math.floor(this.score / 250) * 45)) {
       this.spawnTimer = 0;
       const lane = Math.floor(Math.random() * 3);
-      const isGate = Math.random() > 0.45;
+      
+      // Ensure all 3 lanes are not blocked at the same Y zone
+      const recentTrafficLanes = this.traffic.filter(c => c.y < 130).map(c => c.lane);
+      const isBlocked = recentTrafficLanes.length >= 2;
+      const isGate = isBlocked || (Math.random() > 0.45);
 
       if (isGate) {
         this.pulseGates.push({

@@ -28,9 +28,22 @@ export function getAudioContext() {
     }
   }
   if (audioCtx && audioCtx.state === 'suspended') {
-    audioCtx.resume();
+    audioCtx.resume().catch(() => {});
   }
   return audioCtx;
+}
+
+// Automatically unlock AudioContext on first user interaction across Safari & Chrome
+if (typeof window !== 'undefined') {
+  const unlockAudio = () => {
+    getAudioContext();
+    window.removeEventListener('pointerdown', unlockAudio);
+    window.removeEventListener('touchstart', unlockAudio);
+    window.removeEventListener('keydown', unlockAudio);
+  };
+  window.addEventListener('pointerdown', unlockAudio, { passive: true });
+  window.addEventListener('touchstart', unlockAudio, { passive: true });
+  window.addEventListener('keydown', unlockAudio, { passive: true });
 }
 
 export function playAudio(type) {
@@ -140,20 +153,21 @@ export function startHoverAudio() {
 export function stopHoverAudio() {
   if (hoverGain && audioCtx) {
     try {
-      hoverGain.gain.linearRampToValueAtTime(0.001, audioCtx.currentTime + 0.05);
-      setTimeout(() => {
-        if (hoverOsc) {
-          try {
-            hoverOsc.stop();
-            hoverOsc.disconnect();
-          } catch (e) {}
-          hoverOsc = null;
-          hoverGain = null;
-        }
-      }, 60);
-    } catch (e) {
-      hoverOsc = null;
-      hoverGain = null;
-    }
+      hoverGain.gain.setValueAtTime(hoverGain.gain.value, audioCtx.currentTime);
+      hoverGain.gain.linearRampToValueAtTime(0.0001, audioCtx.currentTime + 0.04);
+    } catch (e) {}
+  }
+  if (hoverOsc) {
+    const oscToStop = hoverOsc;
+    const gainToDisconnect = hoverGain;
+    hoverOsc = null;
+    hoverGain = null;
+    setTimeout(() => {
+      try {
+        oscToStop.stop();
+        oscToStop.disconnect();
+        if (gainToDisconnect) gainToDisconnect.disconnect();
+      } catch (e) {}
+    }, 45);
   }
 }

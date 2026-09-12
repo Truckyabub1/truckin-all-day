@@ -1,4 +1,5 @@
 import { playAudio, getAudioContext } from './audio.js';
+import { getStorageNumber, setStorageNumber } from './storage.js';
 
 export const LOGICAL_WIDTH = 640;
 export const LOGICAL_HEIGHT = 640;
@@ -33,7 +34,7 @@ export class HeavyDirtHaulerEngine {
     this.convoyMachinery = [];
     this.equipmentCycleIndex = 0;
     this.snakeDir = { x: 1, y: 0 };
-    this.nextSnakeDir = null;
+    this.dirQueue = [];
     this.haulRock = null;
     this.stepInterval = 150;
     this.timer = 0;
@@ -41,7 +42,7 @@ export class HeavyDirtHaulerEngine {
   }
 
   init() {
-    this.highScore = Number(localStorage.getItem(this.storageKey)) || 0;
+    this.highScore = getStorageNumber(this.storageKey, 0);
     this.highScoreBroken = false;
   }
 
@@ -54,7 +55,7 @@ export class HeavyDirtHaulerEngine {
         y: Math.floor(Math.random() * this.cellCount)
       };
       attempts++;
-    } while (this.snake.some((seg) => seg.x === pos.x && seg.y === pos.y) && attempts < 100);
+    } while (this.snake.some((seg) => seg.x === pos.x && seg.y === pos.y) && attempts < 200);
     return pos;
   }
 
@@ -74,7 +75,7 @@ export class HeavyDirtHaulerEngine {
     ];
     this.equipmentCycleIndex = 2;
     this.snakeDir = { x: 1, y: 0 };
-    this.nextSnakeDir = null;
+    this.dirQueue = [];
     this.haulRock = this.getRandomRock();
     this.stepInterval = 150;
     this.timer = 0;
@@ -91,9 +92,15 @@ export class HeavyDirtHaulerEngine {
 
   setDirection(newDir) {
     if (!newDir) return;
-    if (this.snakeDir.x + newDir.x === 0 && this.snakeDir.y + newDir.y === 0) return;
-    this.nextSnakeDir = newDir;
-    playAudio('turn');
+    const lastDir = this.dirQueue.length > 0 ? this.dirQueue[this.dirQueue.length - 1] : this.snakeDir;
+    // Reject immediate 180-degree turn
+    if (lastDir.x + newDir.x === 0 && lastDir.y + newDir.y === 0) return;
+    // Don't queue identical direction
+    if (lastDir.x === newDir.x && lastDir.y === newDir.y) return;
+    if (this.dirQueue.length < 2) {
+      this.dirQueue.push(newDir);
+      playAudio('turn');
+    }
   }
 
   update(delta) {
@@ -103,9 +110,8 @@ export class HeavyDirtHaulerEngine {
     if (this.timer < this.stepInterval) return;
     this.timer = 0;
 
-    if (this.nextSnakeDir) {
-      this.snakeDir = this.nextSnakeDir;
-      this.nextSnakeDir = null;
+    if (this.dirQueue.length > 0) {
+      this.snakeDir = this.dirQueue.shift();
     }
 
     const nextHead = {
@@ -161,7 +167,7 @@ export class HeavyDirtHaulerEngine {
     if (this.score > this.highScore) {
       const isFirstBreak = !this.highScoreBroken && this.highScore > 0;
       this.highScore = this.score;
-      localStorage.setItem(this.storageKey, String(this.highScore));
+      setStorageNumber(this.storageKey, this.highScore);
       if (isFirstBreak) {
         this.highScoreBroken = true;
         playAudio('highscore');
