@@ -344,7 +344,10 @@
             </div>
             <div class="arcade-card-footer">
               <span class="card-high-score">Cabinet Best: <strong id="clockworkCardHighScore">0</strong></span>
-              <button class="btn btn-primary" data-launch="clockwork" type="button">Launch Game ▶</button>
+              <div class="arcade-btn-group">
+                <button class="btn btn-primary btn-sm" data-launch="clockwork" type="button">Play ▶</button>
+                <button class="btn btn-secondary btn-sm" data-popup="clockwork" type="button" title="Launch in dedicated window">New Window ↗</button>
+              </div>
             </div>
           </article>
 
@@ -364,7 +367,10 @@
             </div>
             <div class="arcade-card-footer">
               <span class="card-high-score">Cabinet Best: <strong id="haulerCardHighScore">0</strong></span>
-              <button class="btn btn-primary" data-launch="hauler" type="button">Launch Game ▶</button>
+              <div class="arcade-btn-group">
+                <button class="btn btn-primary btn-sm" data-launch="hauler" type="button">Play ▶</button>
+                <button class="btn btn-secondary btn-sm" data-popup="hauler" type="button" title="Launch in dedicated window">New Window ↗</button>
+              </div>
             </div>
           </article>
 
@@ -384,7 +390,10 @@
             </div>
             <div class="arcade-card-footer">
               <span class="card-high-score">Cabinet Best: <strong id="drillCardHighScore">0</strong></span>
-              <button class="btn btn-primary" data-launch="drill" type="button">Launch Game ▶</button>
+              <div class="arcade-btn-group">
+                <button class="btn btn-primary btn-sm" data-launch="drill" type="button">Play ▶</button>
+                <button class="btn btn-secondary btn-sm" data-popup="drill" type="button" title="Launch in dedicated window">New Window ↗</button>
+              </div>
             </div>
           </article>
 
@@ -404,7 +413,10 @@
             </div>
             <div class="arcade-card-footer">
               <span class="card-high-score">Cabinet Best: <strong id="timberCardHighScore">0</strong></span>
-              <button class="btn btn-primary" data-launch="timber" type="button">Launch Game ▶</button>
+              <div class="arcade-btn-group">
+                <button class="btn btn-primary btn-sm" data-launch="timber" type="button">Play ▶</button>
+                <button class="btn btn-secondary btn-sm" data-popup="timber" type="button" title="Launch in dedicated window">New Window ↗</button>
+              </div>
             </div>
           </article>
 
@@ -424,7 +436,10 @@
             </div>
             <div class="arcade-card-footer">
               <span class="card-high-score">Cabinet Best: <strong id="neonCardHighScore">0</strong></span>
-              <button class="btn btn-primary" data-launch="neon" type="button">Launch Game ▶</button>
+              <div class="arcade-btn-group">
+                <button class="btn btn-primary btn-sm" data-launch="neon" type="button">Play ▶</button>
+                <button class="btn btn-secondary btn-sm" data-popup="neon" type="button" title="Launch in dedicated window">New Window ↗</button>
+              </div>
             </div>
           </article>
         </div>
@@ -436,6 +451,7 @@
             <div class="game-actions">
               <button class="game-btn" id="arcadeStartBtn" type="button">Play</button>
               <button class="game-btn" id="arcadeRestartBtn" type="button">Restart</button>
+              <button class="game-btn" id="arcadePopOutBtn" type="button" title="Launch in dedicated window">New Window ↗</button>
               <button class="game-btn" id="arcadeMuteBtn" type="button" aria-label="Mute arcade sound">🔊 Sound: ON</button>
             </div>
           </div>

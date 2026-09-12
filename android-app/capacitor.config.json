@@ -1,0 +1,14 @@
+{
+  "appId": "com.truckinallday.app",
+  "appName": "Truckin all Day",
+  "webDir": "dist",
+  "server": {
+    "androidScheme": "https"
+  },
+  "android": {
+    "backgroundColor": "#090a0f",
+    "allowMixedContent": true,
+    "captureInput": true,
+    "webContentsDebuggingEnabled": true
+  }
+}

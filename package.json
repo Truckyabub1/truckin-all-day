@@ -7,7 +7,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "dev:android": "npm --prefix android-app run dev",
+    "build:android": "npm --prefix android-app run build"
   },
   "devDependencies": {
     "vite": "^6.2.0"

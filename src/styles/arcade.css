@@ -110,6 +110,13 @@
   margin-left: 0.25rem;
 }
 
+.arcade-btn-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
 /* ── ACTIVE GAME CABINET ────────────────────────────────── */
 .game-cabinet {
   max-width: 760px;
@@ -418,4 +425,47 @@ canvas#arcadeCanvas {
   color: #050b14;
   transform: scale(0.96);
   box-shadow: 0 0 35px rgba(245, 158, 11, 0.75);
+}
+
+/* ── STANDALONE / NEW WINDOW POPUP MODE ─────────────────── */
+body.standalone-arcade-mode {
+  background: #040508 !important;
+  background-image: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(0, 242, 254, 0.12), transparent) !important;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+body.standalone-arcade-mode .site-header,
+body.standalone-arcade-mode .hero-section,
+body.standalone-arcade-mode .filter-bar-wrapper,
+body.standalone-arcade-mode #music,
+body.standalone-arcade-mode #merch,
+body.standalone-arcade-mode #about,
+body.standalone-arcade-mode .site-footer,
+body.standalone-arcade-mode .arcade-lobby-grid,
+body.standalone-arcade-mode .section-header {
+  display: none !important;
+}
+
+body.standalone-arcade-mode #arcade {
+  padding: 1rem 0.5rem !important;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+body.standalone-arcade-mode #arcade .container {
+  max-width: 720px;
+  padding: 0 0.5rem;
+}
+
+body.standalone-arcade-mode .game-cabinet {
+  max-width: 660px;
+  margin: 0 auto;
+  border-color: rgba(0, 242, 254, 0.4);
+  box-shadow: 0 0 50px rgba(0, 242, 254, 0.2), inset 0 0 20px rgba(0, 0, 0, 0.8);
 }

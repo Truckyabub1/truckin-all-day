@@ -863,27 +863,30 @@ button {
   gap: 1rem;
 }
 
-/* ── TOAST NOTIFICATIONS ────────────────────────────────── */
+/* ── TOAST NOTIFICATIONS (Subtle, Out of Gameplay Zone) ──── */
 .achievement-toast {
   position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  z-index: 1000;
-  background: rgba(16, 19, 29, 0.92);
-  border: 1px solid var(--amber-primary);
+  top: 1.25rem;
+  right: 1.25rem;
+  z-index: 9999;
+  pointer-events: none;
+  background: rgba(12, 15, 24, 0.88);
+  border: 1px solid rgba(245, 158, 11, 0.55);
   border-radius: var(--radius-pill);
-  padding: 0.75rem 1.5rem;
-  color: #fff;
+  padding: 0.45rem 1rem;
+  color: #f8fafc;
   font-weight: 700;
-  font-size: 0.95rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), var(--shadow-amber);
-  backdrop-filter: blur(16px);
-  animation: slideInUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  font-size: 0.84rem;
+  letter-spacing: 0.02em;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6), 0 0 14px rgba(245, 158, 11, 0.2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  animation: toastFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@keyframes slideInUp {
+@keyframes toastFadeIn {
   from {
-    transform: translateY(100%);
+    transform: translateY(-8px);
     opacity: 0;
   }
   to {
@@ -919,5 +922,12 @@ button {
 
   .stats-strip {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .achievement-toast {
+    top: 0.65rem;
+    right: 0.65rem;
+    padding: 0.35rem 0.75rem;
+    font-size: 0.76rem;
   }
 }
