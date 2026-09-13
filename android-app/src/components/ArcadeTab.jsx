@@ -1,14 +1,32 @@
 import React, { useState, useEffect, useRef } from 'react';
 import confetti from 'canvas-confetti';
-import { Play, RotateCcw, ArrowLeft, Trophy, ChevronRight, Volume2, Flame } from 'lucide-react';
+import { Play, RotateCcw, Trophy } from 'lucide-react';
 import { ARTISTS } from '../data/artists.js';
 import { ClockworkHareEngine } from '../games/clockwork-hare.js';
 import { HeavyDirtHaulerEngine } from '../games/heavy-dirt-hauler.js';
 import { OreDrillRushEngine } from '../games/ore-drill-rush.js';
 import { TimberHollowTrailEngine } from '../games/timber-hollow-trail.js';
 import { NeonHighwayEngine } from '../games/neon-highway.js';
+import { DragonflyTownshipEngine } from '../games/dragonfly-township.js';
 import { playAudio, triggerHaptic } from '../services/audio.js';
 import { getStorageNumber } from '../services/storage.js';
+
+export const ARCADE_GAMES = [
+  ...ARTISTS.map(a => ({
+    gameKey: a.gameKey,
+    name: a.name,
+    gameTitle: a.gameTitle,
+    gameDesc: a.gameDesc,
+    accentColor: a.accentColor
+  })),
+  {
+    gameKey: 'dragonfly',
+    name: 'Arcade Feature',
+    gameTitle: 'Dragonfly Township',
+    gameDesc: 'Lakeside Sky Courier',
+    accentColor: '#00f2fe'
+  }
+];
 
 export function ArcadeTab({ initialGameKey = null, onClearInitialGame }) {
   const [activeGameKey, setActiveGameKey] = useState(initialGameKey || 'clockwork');
@@ -39,6 +57,7 @@ export function ArcadeTab({ initialGameKey = null, onClearInitialGame }) {
       drill: 'oreDrillHighScore',
       timber: 'timberTrailHighScore',
       neon: 'neonHighwayHighScore',
+      dragonfly: 'dragonflyTownshipHighScore',
     };
     setHighScore(getStorageNumber(keyMap[activeGameKey] || 'clockworkHighScore', 0));
     setScore(0);
@@ -72,7 +91,7 @@ export function ArcadeTab({ initialGameKey = null, onClearInitialGame }) {
       setHighScore(hi);
     };
 
-    const handleGameOver = (finalScore, hi) => {
+    const handleGameOver = (finalScore, _hi) => {
       setGameOver(true);
       setIsPlaying(false);
       triggerHaptic([50, 40, 90]);
@@ -87,7 +106,7 @@ export function ArcadeTab({ initialGameKey = null, onClearInitialGame }) {
       }
     };
 
-    const handleAchievement = (icon, msg) => {
+    const handleAchievement = (_icon, _msg) => {
       triggerHaptic([15, 20, 15]);
     };
 
@@ -101,6 +120,8 @@ export function ArcadeTab({ initialGameKey = null, onClearInitialGame }) {
       engine = new TimberHollowTrailEngine(canvas, ctx, handleScore, handleGameOver, handleAchievement);
     } else if (activeGameKey === 'neon') {
       engine = new NeonHighwayEngine(canvas, ctx, handleScore, handleGameOver, handleAchievement);
+    } else if (activeGameKey === 'dragonfly') {
+      engine = new DragonflyTownshipEngine(canvas, ctx, handleScore, handleGameOver, handleAchievement);
     }
 
     if (!engine) return;
@@ -137,20 +158,20 @@ export function ArcadeTab({ initialGameKey = null, onClearInitialGame }) {
     startGame();
   };
 
-  const currentGame = ARTISTS.find(a => a.gameKey === activeGameKey) || ARTISTS[0];
+  const currentGame = ARCADE_GAMES.find(a => a.gameKey === activeGameKey) || ARCADE_GAMES[0];
 
   return (
     <div className="flex flex-col flex-1 pb-24 max-w-md mx-auto w-full select-none">
       {/* Game Selector Chips */}
       <div className="flex gap-2 overflow-x-auto px-4 py-3 no-scrollbar border-b border-white/5">
-        {ARTISTS.map((artist) => {
-          const isSelected = artist.gameKey === activeGameKey;
+        {ARCADE_GAMES.map((game) => {
+          const isSelected = game.gameKey === activeGameKey;
           return (
             <button
-              key={artist.gameKey}
+              key={game.gameKey}
               onClick={() => {
                 triggerHaptic([15]);
-                setActiveGameKey(artist.gameKey);
+                setActiveGameKey(game.gameKey);
                 setIsPlaying(false);
                 setGameOver(false);
               }}
@@ -160,7 +181,7 @@ export function ArcadeTab({ initialGameKey = null, onClearInitialGame }) {
                   : 'bg-[#181d2a] text-gray-400 border border-white/10'
               }`}
             >
-              {artist.gameTitle}
+              {game.gameTitle}
             </button>
           );
         })}
@@ -376,6 +397,75 @@ export function ArcadeTab({ initialGameKey = null, onClearInitialGame }) {
             >
               STEER RIGHT ▶
             </button>
+          </div>
+        )}
+
+        {activeGameKey === 'dragonfly' && (
+          <div className="flex flex-col gap-2 py-1">
+            <div className="grid grid-cols-2 gap-3">
+              <button
+                onPointerDown={(e) => {
+                  e.preventDefault();
+                  triggerHaptic([15]);
+                  if (engineRef.current) engineRef.current.setSteer(-1);
+                }}
+                onPointerUp={(e) => {
+                  e.preventDefault();
+                  if (engineRef.current) engineRef.current.setSteer(0);
+                }}
+                className="py-4 rounded-xl bg-white/10 border border-white/20 active:bg-[#00f2fe] active:text-black font-black text-sm tracking-wider uppercase transition shadow-md"
+                style={{ touchAction: 'none' }}
+              >
+                🔄 ROTATE LEFT
+              </button>
+              <button
+                onPointerDown={(e) => {
+                  e.preventDefault();
+                  triggerHaptic([15]);
+                  if (engineRef.current) engineRef.current.setSteer(1);
+                }}
+                onPointerUp={(e) => {
+                  e.preventDefault();
+                  if (engineRef.current) engineRef.current.setSteer(0);
+                }}
+                className="py-4 rounded-xl bg-white/10 border border-white/20 active:bg-[#00f2fe] active:text-black font-black text-sm tracking-wider uppercase transition shadow-md"
+                style={{ touchAction: 'none' }}
+              >
+                ROTATE RIGHT 🔄
+              </button>
+            </div>
+            <div className="grid grid-cols-2 gap-3">
+              <button
+                onPointerDown={(e) => {
+                  e.preventDefault();
+                  triggerHaptic([20]);
+                  if (engineRef.current) engineRef.current.setThrust(true);
+                }}
+                onPointerUp={(e) => {
+                  e.preventDefault();
+                  if (engineRef.current) engineRef.current.setThrust(false);
+                }}
+                className="py-4 rounded-xl bg-gradient-to-r from-[#00f2fe] to-[#0284c7] text-black font-black text-sm tracking-wider uppercase active:scale-95 transition shadow-lg shadow-[#00f2fe]/20"
+                style={{ touchAction: 'none' }}
+              >
+                ⚡ THRUST / LIFT
+              </button>
+              <button
+                onPointerDown={(e) => {
+                  e.preventDefault();
+                  triggerHaptic([15]);
+                  if (engineRef.current) engineRef.current.setBrake(true);
+                }}
+                onPointerUp={(e) => {
+                  e.preventDefault();
+                  if (engineRef.current) engineRef.current.setBrake(false);
+                }}
+                className="py-4 rounded-xl bg-[#f59e0b]/20 border border-[#f59e0b] text-[#f59e0b] font-black text-sm tracking-wider uppercase active:scale-95 transition"
+                style={{ touchAction: 'none' }}
+              >
+                🛑 AIR-BRAKE / LAND
+              </button>
+            </div>
           </div>
         )}
       </div>

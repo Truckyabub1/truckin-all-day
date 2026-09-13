@@ -4,6 +4,7 @@ import { HeavyDirtHaulerEngine } from './heavy-dirt-hauler.js';
 import { OreDrillRushEngine } from './ore-drill-rush.js';
 import { TimberHollowTrailEngine } from './timber-hollow-trail.js';
 import { NeonHighwayEngine } from './neon-highway.js';
+import { DragonflyTownshipEngine } from './dragonfly-township.js';
 
 export class ArcadeManager {
   constructor() {
@@ -31,12 +32,14 @@ export class ArcadeManager {
     this.drillCardHighScore = document.getElementById('drillCardHighScore');
     this.timberCardHighScore = document.getElementById('timberCardHighScore');
     this.neonCardHighScore = document.getElementById('neonCardHighScore');
+    this.dragonflyCardHighScore = document.getElementById('dragonflyCardHighScore');
 
     // Contextual Virtual Controls Elements
     this.virtualControls = document.getElementById('virtualControls');
     this.dpadControls = document.getElementById('dpadControls');
     this.steerControls = document.getElementById('steerControls');
     this.actionControls = document.getElementById('actionControls');
+    this.flightControls = document.getElementById('flightControls');
     this.actionBtn = document.getElementById('actionBtn');
 
     this.activeEngine = null;
@@ -86,12 +89,21 @@ export class ArcadeManager {
       (icon, msg) => this.showAchievement(icon, msg)
     );
 
+    this.dragonflyEngine = new DragonflyTownshipEngine(
+      this.canvas,
+      this.ctx,
+      (score, hi) => this.handleScoreUpdate(score, hi),
+      (score, hi) => this.handleGameOver(score, hi),
+      (icon, msg) => this.showAchievement(icon, msg)
+    );
+
     this.engines = {
       clockwork: this.clockworkEngine,
       hauler: this.haulerEngine,
       drill: this.drillEngine,
       timber: this.timberEngine,
-      neon: this.neonEngine
+      neon: this.neonEngine,
+      dragonfly: this.dragonflyEngine
     };
 
     this.setupHiDPI();
@@ -153,6 +165,7 @@ export class ArcadeManager {
     if (this.drillCardHighScore) this.drillCardHighScore.textContent = this.drillEngine.highScore;
     if (this.timberCardHighScore) this.timberCardHighScore.textContent = this.timberEngine.highScore;
     if (this.neonCardHighScore) this.neonCardHighScore.textContent = this.neonEngine.highScore;
+    if (this.dragonflyCardHighScore) this.dragonflyCardHighScore.textContent = this.dragonflyEngine.highScore;
   }
 
   handleScoreUpdate(score, hi) {
@@ -167,7 +180,8 @@ export class ArcadeManager {
       hauler: 'HAUL COMPLETE!',
       drill: 'DRILL SHAFT COLLAPSE!',
       timber: 'TIMBER IMPACT!',
-      neon: 'SYSTEM GRID OVERLOAD!'
+      neon: 'SYSTEM GRID OVERLOAD!',
+      dragonfly: 'FLIGHT MISSION TERMINATED!'
     };
     if (this.overlayTitle) {
       this.overlayTitle.textContent = titles[this.activeKey] || 'GAME OVER';
@@ -253,6 +267,13 @@ export class ArcadeManager {
         desc: '120 MPH synthwave speeder! Shift lanes to hit neon pulse boost arches and avoid cruising cyber-traffic.',
         hint: '⚡ Tap left/right half of screen, steer buttons, or Arrow keys.',
         controlType: 'steer'
+      },
+      dragonfly: {
+        engine: this.dragonflyEngine,
+        title: 'DRAGONFLY TOWNSHIP • Sky Courier',
+        desc: 'Pilot the cybernetic dragonfly across the township! Touch down gently on target landing pads for accuracy rewards and refuel at the amber nectar depot before your tank runs dry.',
+        hint: '🪰 A/D or Left/Right to rotate, W/Up/Space to thrust, S/Down to brake. Mobile: Use Steer & Thrust buttons.',
+        controlType: 'flight'
       }
     };
 
@@ -268,6 +289,7 @@ export class ArcadeManager {
       if (this.dpadControls) this.dpadControls.style.display = config.controlType === 'dpad' ? 'grid' : 'none';
       if (this.steerControls) this.steerControls.style.display = config.controlType === 'steer' ? 'flex' : 'none';
       if (this.actionControls) this.actionControls.style.display = config.controlType === 'action' ? 'flex' : 'none';
+      if (this.flightControls) this.flightControls.style.display = config.controlType === 'flight' ? 'flex' : 'none';
     }
 
     if (this.lobbyView) this.lobbyView.style.display = 'none';
@@ -339,11 +361,21 @@ export class ArcadeManager {
       if (document.hidden) {
         if (this.clockworkEngine) this.clockworkEngine.handlePressUp();
         if (this.timberEngine) this.timberEngine.setSteer(0);
+        if (this.dragonflyEngine) {
+          this.dragonflyEngine.setThrust(false);
+          this.dragonflyEngine.setSteer(0);
+          this.dragonflyEngine.setBrake(false);
+        }
       }
     });
     window.addEventListener('blur', () => {
       if (this.clockworkEngine) this.clockworkEngine.handlePressUp();
       if (this.timberEngine) this.timberEngine.setSteer(0);
+      if (this.dragonflyEngine) {
+        this.dragonflyEngine.setThrust(false);
+        this.dragonflyEngine.setSteer(0);
+        this.dragonflyEngine.setBrake(false);
+      }
     });
 
     // Launch buttons (in-page cabinet)
@@ -430,6 +462,12 @@ export class ArcadeManager {
 
       if (this.activeEngine === this.clockworkEngine) {
         this.clockworkEngine.handlePressDown();
+      } else if (this.activeEngine === this.dragonflyEngine) {
+        const rect = this.canvas.getBoundingClientRect();
+        const relX = clientX - rect.left;
+        const isLeft = relX < (rect.width / 2);
+        this.dragonflyEngine.setSteer(isLeft ? -0.8 : 0.8);
+        this.dragonflyEngine.setThrust(true);
       } else {
         // Half-screen left/right tap control for 3-lane and steering games
         const rect = this.canvas.getBoundingClientRect();
@@ -454,6 +492,9 @@ export class ArcadeManager {
         this.clockworkEngine.handlePressUp();
       } else if (this.activeEngine === this.timberEngine) {
         this.timberEngine.setSteer(0);
+      } else if (this.activeEngine === this.dragonflyEngine) {
+        this.dragonflyEngine.setThrust(false);
+        this.dragonflyEngine.setSteer(0);
       }
       hasSwipedInTouch = false;
     };
@@ -605,6 +646,36 @@ export class ArcadeManager {
       this.actionBtn.addEventListener('pointerleave', stopAction);
     }
 
+    // 4. Flight Controls for Dragonfly Township
+    document.querySelectorAll('[data-flight]').forEach((btn) => {
+      const act = btn.dataset.flight;
+
+      const handleFlightDown = (e) => {
+        e.preventDefault();
+        btn.classList.add('active');
+        if (!this.activeEngine || this.activeEngine !== this.dragonflyEngine) return;
+        getAudioContext();
+
+        if (act === 'left') this.dragonflyEngine.setSteer(-1);
+        else if (act === 'right') this.dragonflyEngine.setSteer(1);
+        else if (act === 'thrust') this.dragonflyEngine.setThrust(true);
+        else if (act === 'brake') this.dragonflyEngine.setBrake(true);
+      };
+
+      const handleFlightUp = () => {
+        btn.classList.remove('active');
+        if (!this.activeEngine || this.activeEngine !== this.dragonflyEngine) return;
+        if (act === 'left' || act === 'right') this.dragonflyEngine.setSteer(0);
+        else if (act === 'thrust') this.dragonflyEngine.setThrust(false);
+        else if (act === 'brake') this.dragonflyEngine.setBrake(false);
+      };
+
+      btn.addEventListener('pointerdown', handleFlightDown);
+      btn.addEventListener('pointerup', handleFlightUp);
+      btn.addEventListener('pointercancel', handleFlightUp);
+      btn.addEventListener('pointerleave', handleFlightUp);
+    });
+
     // ── KEYBOARD CONTROLS (With Scroll Lock) ───────────────────
     window.addEventListener('keydown', (e) => {
       if (!this.activeEngine) return;
@@ -667,6 +738,23 @@ export class ArcadeManager {
             this.neonEngine.start();
           }
         }
+      } else if (this.activeEngine === this.dragonflyEngine) {
+        if (key === 'arrowleft' || key === 'a') {
+          this.dragonflyEngine.setSteer(-1);
+        } else if (key === 'arrowright' || key === 'd') {
+          this.dragonflyEngine.setSteer(1);
+        } else if (key === 'arrowup' || key === 'w') {
+          this.dragonflyEngine.setThrust(true);
+        } else if (key === 'arrowdown' || key === 's') {
+          this.dragonflyEngine.setBrake(true);
+        } else if (e.code === 'Space') {
+          if (!this.dragonflyEngine.isRunning || this.dragonflyEngine.isOver) {
+            this.hideOverlay();
+            this.dragonflyEngine.start();
+          } else {
+            this.dragonflyEngine.setThrust(true);
+          }
+        }
       }
 
       if (key === 'escape') {
@@ -685,6 +773,16 @@ export class ArcadeManager {
       } else if (this.activeEngine === this.timberEngine) {
         if (key === 'arrowleft' || key === 'a' || key === 'arrowright' || key === 'd') {
           this.timberEngine.setSteer(0);
+        }
+      } else if (this.activeEngine === this.dragonflyEngine) {
+        if (key === 'arrowleft' || key === 'a' || key === 'arrowright' || key === 'd') {
+          this.dragonflyEngine.setSteer(0);
+        }
+        if (key === 'arrowup' || key === 'w' || e.code === 'Space') {
+          this.dragonflyEngine.setThrust(false);
+        }
+        if (key === 'arrowdown' || key === 's') {
+          this.dragonflyEngine.setBrake(false);
         }
       }
     });

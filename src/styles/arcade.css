@@ -427,6 +427,25 @@ canvas#arcadeCanvas {
   box-shadow: 0 0 35px rgba(245, 158, 11, 0.75);
 }
 
+/* Flight Controls Layout for Dragonfly Township */
+.virtual-flight-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  width: 100%;
+  max-width: 520px;
+}
+
+.flight-steer-row, .flight-thrust-row {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+}
+
+.flight-steer-row .steer-btn, .flight-thrust-row .action-btn {
+  flex: 1;
+}
+
 /* ── STANDALONE / NEW WINDOW POPUP MODE ─────────────────── */
 body.standalone-arcade-mode {
   background: #040508 !important;

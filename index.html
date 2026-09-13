@@ -444,6 +444,29 @@
               </div>
             </div>
           </article>
+
+          <!-- Game 6: Dragonfly Township Courier -->
+          <article class="arcade-card">
+            <div>
+              <div class="arcade-card-header">
+                <div class="arcade-icon" aria-hidden="true">🪰🏘️</div>
+                <div class="arcade-card-info">
+                  <span class="arcade-tag" style="background: var(--amber-subtle); color: var(--amber-primary); border-color: var(--amber-glow);">Arcade Feature • Sky Courier</span>
+                  <h3 class="arcade-card-title">Dragonfly Township</h3>
+                </div>
+              </div>
+              <p class="arcade-card-desc">
+                Pilot the high-tech biomechanical dragonfly across a picturesque lakeside township! Deliver urgent mail and parcels to target landing pads across Town Hall, Windmill, and Watermill for precision accuracy rewards, while docking at amber fuel depots to keep your tanks filled.
+              </p>
+            </div>
+            <div class="arcade-card-footer">
+              <span class="card-high-score">Cabinet Best: <strong id="dragonflyCardHighScore">0</strong></span>
+              <div class="arcade-btn-group">
+                <button class="btn btn-primary btn-sm" data-launch="dragonfly" type="button">Play ▶</button>
+                <button class="btn btn-secondary btn-sm" data-popup="dragonfly" type="button" title="Launch in dedicated window">New Window ↗</button>
+              </div>
+            </div>
+          </article>
         </div>
 
         <!-- Active Sandboxed Game Cabinet -->
@@ -506,6 +529,18 @@
             <!-- Jump & Hover Action Button for Clockwork Hare -->
             <div class="virtual-action-group" id="actionControls" style="display: none;" aria-label="Action controls">
               <button class="action-btn" id="actionBtn" type="button" aria-label="Jump and Hover">🦘 TAP / HOLD TO HOVER 🚁</button>
+            </div>
+
+            <!-- Flight Controls for Dragonfly Township -->
+            <div class="virtual-flight-group" id="flightControls" style="display: none;" aria-label="Flight navigation controls">
+              <div class="flight-steer-row">
+                <button class="steer-btn" data-flight="left" type="button" aria-label="Rotate Left">🔄 ROTATE LEFT</button>
+                <button class="steer-btn" data-flight="right" type="button" aria-label="Rotate Right">ROTATE RIGHT 🔄</button>
+              </div>
+              <div class="flight-thrust-row">
+                <button class="action-btn" data-flight="thrust" type="button" aria-label="Jet Thrust" style="background: linear-gradient(135deg, var(--cyan-primary), #0284c7); color: #000; font-weight: 800;">⚡ THRUST / LIFT</button>
+                <button class="action-btn" data-flight="brake" type="button" aria-label="Air Brake and Land" style="background: rgba(245, 158, 11, 0.25); border: 1.5px solid var(--amber-primary); color: var(--amber-primary);">🛑 AIR-BRAKE / LAND</button>
+              </div>
             </div>
           </div>
         </div>
