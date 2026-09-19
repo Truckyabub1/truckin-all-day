@@ -1,0 +1,23 @@
+<svg viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="szpSun" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ff6bfd"/>
+      <stop offset="100%" stop-color="#00f2fe"/>
+    </linearGradient>
+  </defs>
+  <!-- Retrowave Sun -->
+  <circle cx="500" cy="400" r="240" fill="url(#szpSun)"/>
+  <!-- CRT Sun Slices -->
+  <line x1="280" y1="360" x2="720" y2="360" stroke="#090a0f" stroke-width="14"/>
+  <line x1="290" y1="410" x2="710" y2="410" stroke="#090a0f" stroke-width="18"/>
+  <line x1="310" y1="465" x2="690" y2="465" stroke="#090a0f" stroke-width="24"/>
+  <line x1="350" y1="525" x2="650" y2="525" stroke="#090a0f" stroke-width="30"/>
+  <!-- Perspective Interceptor Supercar -->
+  <polygon points="320,620 680,620 620,540 380,540" fill="#090a0f" stroke="#00f2fe" stroke-width="12"/>
+  <polygon points="410,540 590,540 560,500 440,500" fill="#090a0f" stroke="#ff6bfd" stroke-width="8"/>
+  <!-- Neon Taillights -->
+  <rect x="350" y="590" width="300" height="14" rx="6" fill="#ff6bfd"/>
+  <!-- Typography -->
+  <text x="500" y="780" font-family="'Syne', sans-serif" font-size="60" fill="#00f2fe" font-weight="900" letter-spacing="10" text-anchor="middle">SUBZERO PULSEWAVEZ</text>
+  <text x="500" y="850" font-family="'Space Mono', monospace" font-size="34" fill="#ff6bfd" font-weight="700" letter-spacing="12" text-anchor="middle">HIGHWAY 120 MPH // SYNTHWAVE</text>
+</svg>

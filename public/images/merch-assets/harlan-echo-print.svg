@@ -1,0 +1,14 @@
+<svg viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg">
+  <!-- Mountain Hollow Crest -->
+  <circle cx="500" cy="440" r="290" fill="#0f1915" stroke="#10b981" stroke-width="14"/>
+  <!-- Silver Moon -->
+  <circle cx="610" cy="340" r="70" fill="#dedcd4" opacity="0.9"/>
+  <!-- Pine Peaks Silhouette -->
+  <polygon points="500,230 400,470 600,470" fill="#253b34"/>
+  <polygon points="390,320 280,530 500,530" fill="#1b2b25"/>
+  <polygon points="610,310 500,540 720,540" fill="#1b2b25"/>
+  <polygon points="500,410 330,620 670,620" fill="#131e1a"/>
+  <!-- Typography -->
+  <text x="500" y="780" font-family="'Syne', sans-serif" font-size="68" fill="#dedcd4" font-weight="900" letter-spacing="14" text-anchor="middle">HARLAN ECHO</text>
+  <text x="500" y="850" font-family="'Space Mono', monospace" font-size="32" fill="#10b981" font-weight="700" letter-spacing="10" text-anchor="middle">APPALACHIAN NOIR // GHOST PINES</text>
+</svg>

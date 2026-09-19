@@ -1,0 +1,24 @@
+<svg viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="goldGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fbbf24"/>
+      <stop offset="100%" stop-color="#b45309"/>
+    </linearGradient>
+  </defs>
+  <!-- Eagle Highway Crest Wings -->
+  <path d="M150 380 Q500 240 850 380 L800 440 Q500 320 200 440 Z" fill="url(#goldGrad)"/>
+  <!-- 18-Wheeler Radiator Grille -->
+  <rect x="330" y="360" width="340" height="260" rx="24" fill="#0b0d13" stroke="#f59e0b" stroke-width="16"/>
+  <!-- Chrome Slats -->
+  <line x1="370" y1="410" x2="630" y2="410" stroke="#f3f4f6" stroke-width="12" stroke-linecap="round"/>
+  <line x1="370" y1="460" x2="630" y2="460" stroke="#f3f4f6" stroke-width="12" stroke-linecap="round"/>
+  <line x1="370" y1="510" x2="630" y2="510" stroke="#f3f4f6" stroke-width="12" stroke-linecap="round"/>
+  <line x1="370" y1="560" x2="630" y2="560" stroke="#f3f4f6" stroke-width="12" stroke-linecap="round"/>
+  <!-- Dual High-Intensity Headlights -->
+  <circle cx="390" cy="580" r="28" fill="#00f2fe"/>
+  <circle cx="610" cy="580" r="28" fill="#00f2fe"/>
+  <!-- Typography -->
+  <text x="500" y="760" font-family="'Syne', sans-serif" font-size="64" fill="#f59e0b" font-weight="900" letter-spacing="8" text-anchor="middle">KEEP ON TRUCKIN'</text>
+  <text x="500" y="830" font-family="'Space Mono', monospace" font-size="38" fill="#f3f4f6" font-weight="700" letter-spacing="12" text-anchor="middle">24 / 7 ROAD REPUTATION</text>
+  <text x="500" y="880" font-family="'Inter', sans-serif" font-size="22" fill="#9ca3af" letter-spacing="6" text-anchor="middle">OUTLAW COUNTRY • SOUTHERN ROCK</text>
+</svg>

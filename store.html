@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>Official Merch Store • Truckin all Day x The Purple Vixon</title>
+  
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="Official Merch Store • Truckin all Day x The Purple Vixon" />
+  <meta name="description" content="High-impact artist apparel, heavyweight tour tees, 450 GSM luxury hoodies, 180g audiophile vinyl, and bespoke accessories powered directly by Fourthwall." />
+  <meta name="keywords" content="Truckin all Day Merch, The Purple Vixon, Clockwork Hare, Keep on Truckin 24 7, Iron Stallion Mining Music, Harlan Echo, Subzero Pulsewavez, Fourthwall Store, band merch, heavyweight tees, audiophile vinyl" />
+  <meta name="theme-color" content="#090a0f" />
+  <link rel="canonical" href="https://truckinallday.netlify.app/store.html" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://truckinallday.netlify.app/store.html" />
+  <meta property="og:title" content="Official Merch Store • Truckin all Day x The Purple Vixon" />
+  <meta property="og:description" content="Premium heavyweight artist apparel, luxury fleece, 180g vinyl, and bespoke accessories. Powered by Fourthwall." />
+  <meta property="og:image" content="/favicon.svg" />
+
+  <!-- Icons -->
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+  <!-- Google Fonts Preconnect & Optimized Stylesheet -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@600;700;800;900&family=Space+Mono:wght@700&family=Syne:wght@700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="/src/styles/variables.css" />
+  <link rel="stylesheet" href="/src/styles/main.css" />
+  <link rel="stylesheet" href="/src/styles/store.css" />
+
+  <!-- JSON-LD Structured Data for E-Commerce Catalog -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Store",
+    "name": "Truckin all Day x The Purple Vixon Official Store",
+    "url": "https://truckinallday.netlify.app/store.html",
+    "description": "Official independent music label merchandise store powered by Fourthwall. Sourced from Comfort Colors, Cotton Heritage, and Yupoong premium blanks.",
+    "parentOrganization": {
+      "@type": "MusicGroup",
+      "name": "Truckin all Day",
+      "url": "https://truckinallday.netlify.app/"
+    }
+  }
+  </script>
+</head>
+<body class="store-body">
+
+  <!-- Accessible Skip Link -->
+  <a href="#storeMain" class="skip-link">Skip to store content</a>
+
+  <!-- Top Announcement Bar -->
+  <div class="store-ticker" role="region" aria-label="Store announcements">
+    <div class="ticker-content">
+      <div class="ticker-item">
+        <span>⚡</span>
+        <span>FREE Express Worldwide Tracked Shipping on Orders Over <strong class="ticker-highlight">$75 USD</strong></span>
+      </div>
+      <div class="ticker-item">
+        <span>💎</span>
+        <span>Crafted with <strong class="ticker-purple">Fourthwall Quality Standards</strong> (Comfort Colors & 450 GSM Fleece)</span>
+      </div>
+      <div class="ticker-item">
+        <span>🎸</span>
+        <span>100% of Proceeds Directly Finance Independent Artist Recording & Touring</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Store Header Navigation -->
+  <header class="store-header" id="storeHeader">
+    <div class="container store-header-inner">
+      <a href="/" class="store-brand-group" aria-label="Return to Truckin all Day Platform">
+        <span class="store-brand-logo">🚚</span>
+        <div>
+          <span class="store-brand-title">Truckin all Day</span>
+          <span class="store-brand-sub">The Purple Vixon Store ↗</span>
+        </div>
+      </a>
+
+      <nav class="store-nav-links" aria-label="Store main navigation">
+        <a href="/" class="store-nav-link">🏠 Label Home</a>
+        <a href="/#music" class="store-nav-link">🎸 Artists Roster</a>
+        <a href="/#arcade" class="store-nav-link">🕹️ 5-Artist Arcade</a>
+        <a href="#productsCatalog" class="store-nav-link active">🛍️ Official Catalog</a>
+        <button type="button" id="openSystemsModalBtn" class="store-nav-link" style="background:none; border:none; cursor:pointer;">
+          ⚙️ How Merch Is Made
+        </button>
+      </nav>
+
+      <div class="store-nav-actions">
+        <!-- Multi-Currency Selector -->
+        <select class="currency-select" id="currencySelect" aria-label="Select store currency">
+          <option value="USD">USD ($)</option>
+          <option value="CAD">CAD (CA$)</option>
+          <option value="EUR">EUR (€)</option>
+          <option value="GBP">GBP (£)</option>
+        </select>
+
+        <!-- Slide-out Cart Button -->
+        <button type="button" class="cart-trigger-btn" id="cartTriggerBtn" aria-label="Open shopping bag">
+          <span>🛍️ Bag</span>
+          <span class="cart-count-badge" id="cartCountBadge" style="display: none;">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Store Content -->
+  <main id="storeMain">
+    <!-- Store Hero Spotlight -->
+    <section class="store-hero">
+      <div class="container store-hero-content">
+        <div class="store-badge-strip">
+          <span class="badge-brand">⚡ OFFICIAL FOURTHWALL INTEGRATED STORE</span>
+          <span class="badge badge-cyan">THE PURPLE VIXON CAPSULE</span>
+          <span class="badge badge-amber">100% ARTIST OWNED</span>
+        </div>
+
+        <h1 class="store-hero-title">
+          Soundtracks You Can Wear. <br />
+          <span class="store-title-gradient">Quality Without Compromise.</span>
+        </h1>
+
+        <p class="store-hero-subtitle">
+          Built in collaboration with Fourthwall's premier creator manufacturing facilities. Custom cut-and-sew heavyweight garments, 1200 DPI Direct-to-Garment pigment prints, 3D puff embroidery, and 180g audiophile analog pressings.
+        </p>
+
+        <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+          <a href="#productsCatalog" class="btn btn-primary">
+            Browse All Drops 👇
+          </a>
+          <a href="https://the-purple-vixon-shop.fourthwall.com" target="_blank" rel="noopener" class="btn btn-secondary">
+            Visit Fourthwall Storefront ↗
+          </a>
+        </div>
+
+        <div class="store-quick-stats">
+          <div class="quick-stat-item">
+            <span class="quick-stat-icon">🛡️</span>
+            <span>OEKO-TEX Certified Eco Inks</span>
+          </div>
+          <div class="quick-stat-item">
+            <span class="quick-stat-icon">📦</span>
+            <span>Plastic-Free Recyclable Mailers</span>
+          </div>
+          <div class="quick-stat-item">
+            <span class="quick-stat-icon">🚚</span>
+            <span>Worldwide Tracked Dispatch</span>
+          </div>
+          <div class="quick-stat-item">
+            <span class="quick-stat-icon">🔁</span>
+            <span>30-Day Hassle-Free Exchanges</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Fourthwall Inside-and-Out Quality Pillars Strip -->
+    <section class="quality-strip" aria-label="Manufacturing Quality Pillars">
+      <div class="container">
+        <div class="quality-grid">
+          <article class="quality-card">
+            <div class="quality-card-header">
+              <span class="quality-card-icon">🧵</span>
+              <h2 class="quality-card-title">Heavyweight Blanks</h2>
+            </div>
+            <p class="quality-card-desc">
+              Sourced on Comfort Colors 1717 (240 GSM) and Cotton Heritage 420-450 GSM French terry. Pre-shrunk, combed ringspun fibers for an enduring vintage drape.
+            </p>
+          </article>
+
+          <article class="quality-card">
+            <div class="quality-card-header">
+              <span class="quality-card-icon">🎨</span>
+              <h2 class="quality-card-title">1200 DPI Precision</h2>
+            </div>
+            <p class="quality-card-desc">
+              Direct-to-Garment and high-pigment DTFx printing cured at precise temperatures for vivid clarity and a soft hand that never cracks or peels.
+            </p>
+          </article>
+
+          <article class="quality-card">
+            <div class="quality-card-header">
+              <span class="quality-card-icon">🧢</span>
+              <h2 class="quality-card-title">Yupoong & 3D Puff</h2>
+            </div>
+            <p class="quality-card-desc">
+              Classic structured 6-panel silhouettes with over 18,000 stitches of raised high-density embroidery and moisture-wicking headbands.
+            </p>
+          </article>
+
+          <article class="quality-card">
+            <div class="quality-card-header">
+              <span class="quality-card-icon">💿</span>
+              <h2 class="quality-card-title">180g Audiophile Vinyl</h2>
+            </div>
+            <p class="quality-card-desc">
+              Mastered specifically for analog playback from lossless tape transfers. Pressed on 180-gram virgin smoke marble vinyl in Europe.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Store Controls & Filter Section -->
+    <section class="store-controls-section" id="productsCatalog">
+      <div class="container controls-wrap">
+        <!-- Search and Sort Row -->
+        <div class="search-and-sort-row">
+          <div class="search-box">
+            <span class="search-icon" aria-hidden="true">🔍</span>
+            <input 
+              type="search" 
+              id="storeSearchInput" 
+              class="search-input" 
+              placeholder="Search by artist, garment, blank spec, or keyword..." 
+              aria-label="Search store products"
+            />
+          </div>
+
+          <div class="sort-select-wrap">
+            <label for="storeSortSelect" class="sort-label">Sort by:</label>
+            <select id="storeSortSelect" class="sort-select">
+              <option value="featured">Featured Drops</option>
+              <option value="price-low">Price: Low to High</option>
+              <option value="price-high">Price: High to Low</option>
+              <option value="rating">Highest Rated</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Artist Filter Pills -->
+        <div class="artist-pills-row" id="artistPillsRow" role="toolbar" aria-label="Filter products by headline artist">
+          <!-- Populated dynamically by storeApp.js -->
+        </div>
+
+        <!-- Category Filter Tabs -->
+        <div class="category-tabs-row" id="categoryTabsRow" role="tablist" aria-label="Filter products by product category">
+          <!-- Populated dynamically by storeApp.js -->
+        </div>
+
+        <!-- Results Info Bar -->
+        <div class="results-info-bar">
+          <span id="resultsCount">Loading catalog...</span>
+          <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--neon-pink);">
+            Powered by Fourthwall E-Commerce
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Products Grid Section -->
+    <section class="products-section">
+      <div class="container">
+        <div class="products-grid" id="productsGrid" aria-live="polite">
+          <!-- Populated dynamically by storeApp.js with interactive SVG mockups -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Quick View Modal Backdrop & Card -->
+  <div class="modal-backdrop" id="quickViewBackdrop" role="dialog" aria-modal="true" aria-labelledby="quickViewTitle">
+    <div class="modal-card" id="quickViewCard">
+      <button type="button" class="modal-close-btn" id="quickViewCloseBtn" aria-label="Close product preview">✕</button>
+      
+      <!-- Left Column: Media & Art Direction Prompt -->
+      <div class="modal-media-col" id="modalMediaCol">
+        <!-- Populated dynamically -->
+      </div>
+
+      <!-- Right Column: Specs, Lore, Sizing, CTA -->
+      <div class="modal-info-col" id="modalInfoCol">
+        <!-- Populated dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Systems Dynamics Modal: "How Merch Is Made Inside Fourthwall" -->
+  <div class="modal-backdrop" id="systemsModalBackdrop" role="dialog" aria-modal="true" aria-label="How Fourthwall Works">
+    <div class="modal-card" style="max-width: 800px; display: block; padding: 2.5rem;">
+      <button type="button" class="modal-close-btn" id="closeSystemsModalBtn" aria-label="Close modal">✕</button>
+
+      <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem;">
+        <span style="font-size: 2rem;">⚙️</span>
+        <h2 style="font-family: var(--font-display); font-size: 1.6rem; color: var(--text-pure); margin: 0;">
+          The Fourthwall Systems Dynamic (Inside & Out)
+        </h2>
+      </div>
+
+      <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem;">
+        Unlike standard low-cost print-on-demand suppliers that rely on coarse blanks and generic ink transfers, 
+        our store integrates directly with Fourthwall's enterprise creator manufacturing network. Here is how each garment is engineered from scratch:
+      </p>
+
+      <div style="display: grid; gap: 1.25rem;">
+        <div style="background: rgba(24, 29, 42, 0.7); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 1rem;">
+          <h3 style="color: var(--cyan-primary); font-size: 0.95rem; margin-bottom: 0.3rem;">1. Vector Raster RIP & Pigment Calibration</h3>
+          <p style="color: var(--text-muted); font-size: 0.82rem; line-height: 1.45; margin: 0;">
+            Artwork files are ingested at uncompressed 1200 DPI into specialized Raster Image Processors (RIP) with bespoke ink limits calibrated specifically for each fabric composition (100% cotton vs. poly-blend fleece), preventing bleeding and ensuring extreme sharpness.
+          </p>
+        </div>
+
+        <div style="background: rgba(24, 29, 42, 0.7); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 1rem;">
+          <h3 style="color: var(--amber-primary); font-size: 0.95rem; margin-bottom: 0.3rem;">2. Heavyweight Blank Provenance</h3>
+          <p style="color: var(--text-muted); font-size: 0.82rem; line-height: 1.45; margin: 0;">
+            Every silhouette is built on pre-shrunk, enzyme-washed premium blanks from industry-leading mills (Comfort Colors 1717, Cotton Heritage 250-450 GSM French terry, and Yupoong Classics). No scratchy tubular tees.
+          </p>
+        </div>
+
+        <div style="background: rgba(24, 29, 42, 0.7); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 1rem;">
+          <h3 style="color: var(--neon-pink); font-size: 0.95rem; margin-bottom: 0.3rem;">3. Precision Curing & Embroidery Digitizing</h3>
+          <p style="color: var(--text-muted); font-size: 0.82rem; line-height: 1.45; margin: 0;">
+            Inks are cured inside forced-air conveyor ovens with controlled humidity, fusing pigments into the fiber matrix. Headwear and jackets undergo 3D puff digitizing with tight stitch densities exceeding 18,000 passes for tangible, sculpted tactile depth.
+          </p>
+        </div>
+
+        <div style="background: rgba(24, 29, 42, 0.7); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 1rem;">
+          <h3 style="color: var(--green-primary); font-size: 0.95rem; margin-bottom: 0.3rem;">4. Multi-Tiered Quality Inspection & Localized Dispatch</h3>
+          <p style="color: var(--text-muted); font-size: 0.82rem; line-height: 1.45; margin: 0;">
+            Every unit passes garment inspection, seam tensile check, and print color matching before being packed into plastic-free, recyclable FSC-certified mailers and shipped from fulfillment hubs in the US, EU, UK, and Canada.
+          </p>
+        </div>
+      </div>
+
+      <div style="margin-top: 2rem; text-align: center;">
+        <a href="https://the-purple-vixon-shop.fourthwall.com" target="_blank" rel="noopener" class="btn btn-primary">
+          Explore Live Fourthwall Storefront ↗
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide-Out Cart Drawer -->
+  <div class="cart-drawer-backdrop" id="cartBackdrop" aria-hidden="true"></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Shopping bag">
+    <div class="cart-drawer-header">
+      <h2 class="cart-title">
+        <span>🛍️</span>
+        <span>Your Shopping Bag</span>
+      </h2>
+      <button type="button" class="cart-close-btn" id="cartCloseBtn" aria-label="Close bag">✕</button>
+    </div>
+
+    <!-- Free Shipping Progress Tracker -->
+    <div class="free-shipping-box">
+      <div class="shipping-progress-text" id="shippingProgressText">
+        <span>Add items for Free Worldwide Shipping</span>
+        <span>0%</span>
+      </div>
+      <div class="shipping-progress-bar">
+        <div class="shipping-progress-fill" id="shippingProgressFill" style="width: 0%;"></div>
+      </div>
+    </div>
+
+    <!-- Cart Items Scrollable List -->
+    <div class="cart-items-list" id="cartItemsList">
+      <!-- Populated dynamically by storeApp.js -->
+    </div>
+
+    <!-- Cart Footer with Totals and Fourthwall Checkout -->
+    <div class="cart-drawer-footer">
+      <div class="cart-summary-row">
+        <span>Subtotal</span>
+        <span id="cartSubtotal">$0.00</span>
+      </div>
+      <div class="cart-summary-row">
+        <span>Estimated Worldwide Shipping</span>
+        <span style="color: var(--green-primary);">Calculated at Checkout</span>
+      </div>
+      <div class="cart-summary-row cart-total-row">
+        <span>Total</span>
+        <span id="cartTotal" style="color: var(--cyan-primary);">$0.00</span>
+      </div>
+
+      <a 
+        href="https://the-purple-vixon-shop.fourthwall.com" 
+        target="_blank" 
+        rel="noopener" 
+        class="cart-checkout-btn" 
+        id="cartCheckoutBtn"
+      >
+        <span>⚡ Checkout with Fourthwall</span>
+      </a>
+
+      <p class="cart-guarantee-note">
+        🔒 Encrypted, secure checkout powered directly by Fourthwall. Multi-currency and worldwide shipping supported.
+      </p>
+    </div>
+  </aside>
+
+  <!-- Toast Notification -->
+  <div class="store-toast" id="storeToast" role="status" aria-live="polite">
+    <span style="font-size: 1.2rem;">✨</span>
+    <span id="toastMessage">Item added to bag!</span>
+  </div>
+
+  <!-- Store Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div>
+          <a href="/" class="brand-link">
+            <div class="brand-logo-icon" aria-hidden="true">🚚</div>
+            <span class="brand-text">Truckin all Day</span>
+          </a>
+          <p class="footer-brand-desc">
+            The official merchandise collective for Truckin all Day and The Purple Vixon. Premium heavyweight apparel, 180g vinyl, and accessories for fans and road warriors worldwide.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h3>Store Navigation</h3>
+          <div class="footer-links">
+            <a href="/" class="footer-link">Label Home</a>
+            <a href="/#music" class="footer-link">Artist Roster</a>
+            <a href="/#arcade" class="footer-link">5-Artist Arcade</a>
+            <a href="#productsCatalog" class="footer-link">All Products</a>
+            <a href="https://the-purple-vixon-shop.fourthwall.com" target="_blank" rel="noopener" class="footer-link">Fourthwall Shopfront ↗</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h3>Headline Artists</h3>
+          <div class="footer-links">
+            <a href="#artist-clockwork-hare" class="footer-link">CLOCKWORK HARE</a>
+            <a href="#artist-keep-on-truckin" class="footer-link">Keep on Truckin' 24 7</a>
+            <a href="#artist-iron-stallion" class="footer-link">Iron Stallion Mining</a>
+            <a href="#artist-harlan-echo" class="footer-link">Harlan Echo</a>
+            <a href="#artist-subzero-pulsewavez" class="footer-link">Subzero Pulsewavez</a>
+            <a href="#artist-the-purple-vixon" class="footer-link">The Purple Vixon</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h3>Quality Guarantee</h3>
+          <div class="footer-links">
+            <span style="color: var(--text-muted); font-size: 0.8rem;">Comfort Colors 1717 Blanks</span>
+            <span style="color: var(--text-muted); font-size: 0.8rem;">420-450 GSM French Terry</span>
+            <span style="color: var(--text-muted); font-size: 0.8rem;">180g Audiophile Vinyl</span>
+            <span style="color: var(--text-muted); font-size: 0.8rem;">Yupoong 6606 Snapbacks</span>
+            <span style="color: var(--text-muted); font-size: 0.8rem;">Tracked Global Shipping</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 Truckin all Day x The Purple Vixon. All rights reserved. Powered by Fourthwall E-Commerce.</p>
+        <p><a href="#storeMain" style="color: var(--cyan-primary);">Back to Top ↑</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Store JavaScript Bundle -->
+  <script type="module" src="/src/store/storeApp.js"></script>
+</body>
+</html>
