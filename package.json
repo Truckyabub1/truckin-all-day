@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && npm --prefix android-app run build && node -e \"const fs=require('fs'); fs.cpSync('android-app/dist', 'dist/app', {recursive: true});\"",
+    "build": "npm --prefix android-app install && vite build && npm --prefix android-app run build && node -e \"const fs=require('fs'); fs.cpSync('android-app/dist', 'dist/app', {recursive: true});\"",
     "preview": "vite preview",
     "dev:android": "npm --prefix android-app run dev",
     "build:android": "npm --prefix android-app run build",
