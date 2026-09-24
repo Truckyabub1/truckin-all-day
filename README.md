@@ -23,7 +23,7 @@ High-impact country-meets-rock music label platform, interactive cartoon arcade 
    - **Universal Vector Engine:** 100% procedural 2D vector graphics (0 emoji font bugs) with HiDPI Retina scaling, procedural Web Audio synthesizer, touch swipe, virtual D-pad, and localStorage high score tracking.
 
 3. **Official Fourthwall Storefront Showcase**
-   - Direct integration pointing to official merchandise supply: `https://the-purple-vixon-shop.fourthwall.com`.
+   - Direct integration pointing to official merchandise supply: `https://the-purple-vixon-shop.fourthwall.com/en-cad/collections/all`.
    - Worldwide shipping, tour apparel, vinyl pressings, and accessories.
 
 ---

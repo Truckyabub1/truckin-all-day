@@ -571,7 +571,7 @@ class StoreApp {
         </div>
 
         <a 
-          href="https://the-purple-vixon-shop.fourthwall.com" 
+          href="https://the-purple-vixon-shop.fourthwall.com/en-cad/collections/all" 
           target="_blank" 
           rel="noopener" 
           class="modal-direct-fourthwall-btn"
