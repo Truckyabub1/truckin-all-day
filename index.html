@@ -12,21 +12,21 @@
   <meta name="author" content="Truckin all Day" />
   <meta name="robots" content="index, follow" />
   <meta name="theme-color" content="#090a0f" />
-  <link rel="canonical" href="https://truckinallday.netlify.app/" />
+  <link rel="canonical" href="https://truckin-all-day.vercel.app/" />
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://truckinallday.netlify.app/" />
+  <meta property="og:url" content="https://truckin-all-day.vercel.app/" />
   <meta property="og:title" content="Truckin all Day • Official Label Platform & Artist Arcade" />
   <meta property="og:description" content="High-impact country-rock label storytelling, streaming previews across 5 signature artists, official merch, and custom interactive games." />
-  <meta property="og:image" content="https://truckinallday.netlify.app/favicon.svg" />
+  <meta property="og:image" content="https://truckin-all-day.vercel.app/favicon.svg" />
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:url" content="https://truckinallday.netlify.app/" />
+  <meta name="twitter:url" content="https://truckin-all-day.vercel.app/" />
   <meta name="twitter:title" content="Truckin all Day • Official Label Platform & Artist Arcade" />
   <meta name="twitter:description" content="High-impact country-rock label storytelling, streaming previews across 5 signature artists, official merch, and custom interactive games." />
-  <meta name="twitter:image" content="https://truckinallday.netlify.app/favicon.svg" />
+  <meta name="twitter:image" content="https://truckin-all-day.vercel.app/favicon.svg" />
 
   <!-- Icons & Manifest -->
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -54,10 +54,10 @@
     "@graph": [
       {
         "@type": "MusicGroup",
-        "@id": "https://truckinallday.netlify.app/#recordlabel",
+        "@id": "https://truckin-all-day.vercel.app/#recordlabel",
         "name": "Truckin all Day",
-        "url": "https://truckinallday.netlify.app/",
-        "logo": "https://truckinallday.netlify.app/favicon.svg",
+        "url": "https://truckin-all-day.vercel.app/",
+        "logo": "https://truckin-all-day.vercel.app/favicon.svg",
         "description": "Independent country, rock, steampunk, and synthwave music label platform featuring 5 signature artists and custom arcade games.",
         "genre": ["Outlaw Country", "Southern Rock", "Steampunk", "Synthwave", "Industrial Americana"],
         "member": [
@@ -73,7 +73,7 @@
       },
       {
         "@type": "WebApplication",
-        "@id": "https://truckinallday.netlify.app/#arcade",
+        "@id": "https://truckin-all-day.vercel.app/#arcade",
         "name": "Truckin all Day Artist Arcade",
         "applicationCategory": "GameApplication",
         "operatingSystem": "All modern browsers",
@@ -329,10 +329,10 @@
             </div>
             <div>
               <div class="streaming-platform-grid" aria-label="Sw33t P3ach streaming links">
-                <a href="https://open.spotify.com/?utm_source=gemini" target="_blank" rel="noopener" class="platform-btn spotify" aria-label="Listen on Spotify">🟢 Spotify</a>
-                <a href="https://music.apple.com/?utm_source=gemini" target="_blank" rel="noopener" class="platform-btn apple" aria-label="Listen on Apple Music">🍎 Apple Music</a>
-                <a href="https://www.youtube.com/channel/UCWuBFVAqNhSJuDVjo9LVi9Q" target="_blank" rel="noopener" class="platform-btn youtube" aria-label="Listen on YouTube Music">▶️ YouTube</a>
-                <a href="https://music.amazon.com/?utm_source=gemini" target="_blank" rel="noopener" class="platform-btn amazon" aria-label="Listen on Amazon Music">📦 Amazon</a>
+                <a href="https://www.youtube.com/channel/UCWuBFVAqNhSJuDVjo9LVi9Q" target="_blank" rel="noopener" class="platform-btn youtube" aria-label="Listen on YouTube Music" style="grid-column: span 2;">▶️ YouTube</a>
+                <span class="platform-btn spotify" aria-label="Spotify — Coming Soon" style="opacity:0.45; cursor:not-allowed; pointer-events:none;">🟢 Spotify — Soon</span>
+                <span class="platform-btn apple" aria-label="Apple Music — Coming Soon" style="opacity:0.45; cursor:not-allowed; pointer-events:none;">🍎 Apple — Soon</span>
+                <span class="platform-btn amazon" aria-label="Amazon — Coming Soon" style="opacity:0.45; cursor:not-allowed; pointer-events:none; grid-column: span 2;">📦 Amazon — Soon</span>
               </div>
             </div>
           </article>
@@ -769,6 +769,14 @@
             <a href="https://music.youtube.com" target="_blank" rel="noopener" class="footer-link">YouTube Music</a>
             <a href="https://music.amazon.com" target="_blank" rel="noopener" class="footer-link">Amazon Music</a>
             <a href="https://www.deezer.com" target="_blank" rel="noopener" class="footer-link">Deezer</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h3>Legal</h3>
+          <div class="footer-links">
+            <a href="/privacy.html" class="footer-link">Privacy Policy</a>
+            <a href="/terms.html" class="footer-link">Terms of Service</a>
           </div>
         </div>
       </div>

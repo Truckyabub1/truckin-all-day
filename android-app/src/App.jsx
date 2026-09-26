@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { TopAppBar } from './components/TopAppBar.jsx';
 import { BottomNav } from './components/BottomNav.jsx';
 import { ArcadeTab } from './components/ArcadeTab.jsx';
@@ -6,9 +6,28 @@ import { RosterTab } from './components/RosterTab.jsx';
 import { DispatcherTab } from './components/DispatcherTab.jsx';
 import { GarageTab } from './components/GarageTab.jsx';
 
+// Capacitor native plugin initialization (gracefully no-ops in browser)
+async function initNativePlugins() {
+  try {
+    const { StatusBar, Style } = await import('@capacitor/status-bar');
+    await StatusBar.setStyle({ style: Style.Dark });
+    await StatusBar.setBackgroundColor({ color: '#090a0f' });
+    await StatusBar.setOverlaysWebView({ overlay: false });
+  } catch (_) {}
+  try {
+    const { SplashScreen } = await import('@capacitor/splash-screen');
+    await SplashScreen.hide({ fadeOutDuration: 300 });
+  } catch (_) {}
+}
+
+
 export default function App() {
   const [activeTab, setActiveTab] = useState('arcade');
   const [arcadeInitialGame, setArcadeInitialGame] = useState(null);
+
+  useEffect(() => {
+    initNativePlugins();
+  }, []);
 
   const handleLaunchGame = (gameKey) => {
     setArcadeInitialGame(gameKey);
