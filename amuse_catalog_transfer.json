@@ -1,0 +1,43 @@
+{
+  "title": "Amuse Catalog Transfer Manifest",
+  "targetAccountOwner": "Brydan Carey",
+  "royaltyDistribution": "100% to Brydan Carey",
+  "generatedAt": "2026-09-26T23:03:21.622Z",
+  "artists": [
+    {
+      "artistName": "CLOCKWORK HARE",
+      "spotifyArtistUrl": "https://open.spotify.com/artist/5LAQn3bd2ON2IAk8p6gC3h",
+      "appleArtistUrl": "https://music.apple.com/us/artist/1896298714",
+      "rightsOwner": "Brydan Carey",
+      "split": "100% Brydan Carey"
+    },
+    {
+      "artistName": "Keep on Truckin' 24 7",
+      "spotifyArtistUrl": "https://open.spotify.com/artist/1wTZsklVdp8kNNlvKJb5qy",
+      "appleArtistUrl": "https://music.apple.com/us/artist/1888811097",
+      "rightsOwner": "Brydan Carey",
+      "split": "100% Brydan Carey"
+    },
+    {
+      "artistName": "Iron Stallion Mining Music",
+      "spotifyArtistUrl": "https://open.spotify.com/artist/3m5JAbsp5lsl9NNRH993Jn",
+      "appleArtistUrl": "https://music.apple.com/us/artist/1889242335",
+      "rightsOwner": "Brydan Carey",
+      "split": "100% Brydan Carey"
+    },
+    {
+      "artistName": "Harlan Echo",
+      "spotifyArtistUrl": "https://open.spotify.com/artist/1Eu8tyGtdQSAyIhzfwBIy0",
+      "appleArtistUrl": "https://music.apple.com/us/artist/1896240540",
+      "rightsOwner": "Brydan Carey",
+      "split": "100% Brydan Carey"
+    },
+    {
+      "artistName": "Subzero Pulsewavez",
+      "spotifyArtistUrl": "https://open.spotify.com/artist/6WP6XVegHuqBX5EODcCJgs",
+      "appleArtistUrl": "https://music.apple.com/us/artist/1896303097",
+      "rightsOwner": "Brydan Carey",
+      "split": "100% Brydan Carey"
+    }
+  ]
+}

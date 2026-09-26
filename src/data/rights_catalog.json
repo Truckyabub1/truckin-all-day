@@ -1,0 +1,58 @@
+{
+  "catalogOwner": "Brydan Carey",
+  "royaltySharePercent": 100,
+  "labelName": "Truckin all Day",
+  "amuseAccountOwner": "Brydan Carey",
+  "artists": [
+    {
+      "id": "clockwork-hare",
+      "artistName": "CLOCKWORK HARE",
+      "spotifyId": "5LAQn3bd2ON2IAk8p6gC3h",
+      "appleArtistId": "1896298714",
+      "amazonArtistId": "B0GZLJTBRK",
+      "deezerId": "344kPSPntZoEWOMeNLriT",
+      "rightsOwner": "Brydan Carey",
+      "royaltyPercent": 100
+    },
+    {
+      "id": "keep-on-truckin",
+      "artistName": "Keep on Truckin' 24 7",
+      "spotifyId": "1wTZsklVdp8kNNlvKJb5qy",
+      "appleArtistId": "1888811097",
+      "amazonArtistId": "B0GVBN6S9K",
+      "deezerId": "382280851",
+      "rightsOwner": "Brydan Carey",
+      "royaltyPercent": 100
+    },
+    {
+      "id": "iron-stallion",
+      "artistName": "Iron Stallion Mining Music",
+      "spotifyId": "3m5JAbsp5lsl9NNRH993Jn",
+      "appleArtistId": "1889242335",
+      "amazonArtistId": "B0GVJ2W8Q6",
+      "deezerId": "344kLs4qSik472bU5NaqE",
+      "rightsOwner": "Brydan Carey",
+      "royaltyPercent": 100
+    },
+    {
+      "id": "harlan-echo",
+      "artistName": "Harlan Echo",
+      "spotifyId": "1Eu8tyGtdQSAyIhzfwBIy0",
+      "appleArtistId": "1896240540",
+      "amazonArtistId": "B0GZHWH24K",
+      "deezerId": "344lybtLgfHGQAILHf1KF",
+      "rightsOwner": "Brydan Carey",
+      "royaltyPercent": 100
+    },
+    {
+      "id": "subzero-pulsewavez",
+      "artistName": "Subzero Pulsewavez",
+      "spotifyId": "6WP6XVegHuqBX5EODcCJgs",
+      "appleArtistId": "1896303097",
+      "amazonArtistId": "B0GZLL82Q4",
+      "deezerId": "344lBHH7LElnKW79D7ugK",
+      "rightsOwner": "Brydan Carey",
+      "royaltyPercent": 100
+    }
+  ]
+}
