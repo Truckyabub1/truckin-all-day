@@ -1,5 +1,17 @@
 import { ARTISTS } from './data/artists.js';
 import { ArcadeManager } from './games/arcade-manager.js';
+import { registerSW } from 'virtual:pwa-register';
+
+// Register Service Worker for offline PWA support
+const updateSW = registerSW({
+  onNeedRefresh() {
+    console.log('New content available, please refresh.');
+  },
+  onOfflineReady() {
+    console.log('App ready to work offline.');
+  },
+});
+
 
 // ── DOM ELEMENTS ─────────────────────────────────────────────
 const artistGrid = document.getElementById('artistGrid');
