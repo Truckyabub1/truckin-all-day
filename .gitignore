@@ -18,3 +18,8 @@ dist/
 .netlify/
 .vercel
 .env*
+android-app-react-backup/
+android/local.properties
+android/.gradle/
+android/app/build/
+ios/App/build/

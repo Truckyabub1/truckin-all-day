@@ -22,16 +22,13 @@ jobs:
           
       - name: Sync Capacitor iOS
         run: |
-          cd android-app
-          npm install @capacitor/ios
-          npx cap add ios || true
-          npx cap sync ios
+          npm run cap:sync
 
       - name: Build Xcode Archive
         run: |
-          cd android-app/ios/App
+          cd ios/App
           xcodebuild archive \
-            -workspace App.xcworkspace \
+            -project App.xcodeproj \
             -scheme App \
             -configuration Release \
             -archivePath $PWD/build/App.xcarchive \
@@ -42,4 +39,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ios-xcarchive
-          path: android-app/ios/App/build/App.xcarchive
+          path: ios/App/build/App.xcarchive
