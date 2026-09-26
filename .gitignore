@@ -23,3 +23,10 @@ android/local.properties
 android/.gradle/
 android/app/build/
 ios/App/build/
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/
